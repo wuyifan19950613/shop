@@ -99,8 +99,13 @@ export default {
       },
     ],
     indexBanner: {
+      speed:300,
+      autoplay : {
+        delay:3000
+      },
+      loop : true,
       pagination: {
-        el: '.index-banner-pagination'
+        el: '.index-banner-pagination',
       }
     },
   }),
