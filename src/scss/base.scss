@@ -13,6 +13,11 @@ body,html{
 ul,li,ol{
   list-style: none;
 }
+// 最大750px;
+.max-width{
+  max-width: 750px;
+  margin: auto;
+}
 // swiper 分页器导航重写
 .index-banner-pagination{
   width: auto!important;

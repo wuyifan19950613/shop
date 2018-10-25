@@ -1,5 +1,5 @@
 <template>
-  <div id="">
+  <div id="" class="max-width">
     <!--  查询商品input start-->
     <div class="serch-commodity">
       <div>
@@ -11,7 +11,7 @@
     <!--  首页banner图start-->
     <swiper :options="indexBanner" class="index-banner">
       <swiper-slide v-for="(item, index) in imgUrl" :key="index">
-        <img :src="item" alt="">
+        <img v-lazy="item" alt="">
       </swiper-slide>
       <div class="swiper-pagination index-banner-pagination" slot="pagination"></div>
     </swiper>
@@ -29,7 +29,7 @@
       <ul class="commodity-list">
         <li class="" v-for="(item, index) in commodityUrl" :key="index">
           <a href="">
-            <img :src="item.imgUrl" :alt="item.title">
+            <img v-lazy="item.imgUrl" :alt="item.title">
           </a>
         </li>
       </ul>
