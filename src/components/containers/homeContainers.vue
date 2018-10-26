@@ -1,5 +1,6 @@
 <template>
   <div>
+    <common-header></common-header>
     <router-view class=""/>
   </div>
 </template>

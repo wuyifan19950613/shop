@@ -21,4 +21,5 @@ export default {
 <style lang="scss">
   @import "./scss/base";
   @import "./scss/index";
+  @import "./scss/common"
 </style>
