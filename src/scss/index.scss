@@ -231,20 +231,38 @@
     }
   }
 }
+.default-height{
+  height: .9rem;
+}
 .nav-swiper{
   padding: 0 .2rem;
   overflow-x: auto;
-  height: .6rem;
+  height: .9rem;
+  box-sizing: border-box;
+  transition: all .5s;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  &.active{
+    position: fixed;
+    top: .95rem;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 1px 1px 13px #ccc;
+  }
   .nav-slide{
     text-align: center;
-    height: .5rem;
-    line-height: .5rem;
     display: inline-block;
     width: auto;
     font-size: .28rem;
     .nav-title{
       padding: 0 .2rem;
       transform: all 2s;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       &.active{
         font-weight: 600;
         font-size: .3rem;
@@ -252,5 +270,134 @@
         box-sizing: border-box;
       }
     }
+  }
+}
+.details-banner{
+  img{
+    display: block;
+  }
+}
+.commodity-content{
+  padding: .26rem .2rem;
+  background: #fff;
+  .source-icon{
+    background: url('./assets/img/icon/tianmaoicon_03.png');
+    background-size: 100%;
+    width: .27rem;
+    height: .27rem;
+    display: inline-block;
+  }
+  h1{
+    font-size: .28rem;
+    color: #000;
+    vertical-align: middle;
+    font-weight: normal;
+  }
+  .sale-price{
+    margin-top: .15rem;
+    position: relative;
+    display: inline-block;
+    .title{
+      font-size: .24rem;
+      color: #fff;
+      background: #f95e5b;
+      color: #fff;
+      padding: .04rem .02rem;
+      border-radius: .05rem;
+      position: absolute;
+      top: 50%;
+      right: -.94rem;
+      transform: translateY(-50%);
+    }
+    .icon-fu{
+      color: #f95e5b;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+    .money{
+      color: #f95e5b;
+      font-size: .48rem;
+      vertical-align: bottom;
+      line-height: .8;
+      padding-left: .3rem;
+    }
+  }
+}
+.present-price{
+  color: #787878;
+  font-size: .24rem;
+  margin-top: .1rem;
+  padding-left: .06rem;
+  .money{
+    text-decoration: line-through;
+  }
+}
+.copy-password{
+  background: #fff;
+  padding: .2rem;
+  .password{
+    text-align: center;
+    border: 1px dashed #f95e5b;
+    .password-text,.password-reamrk{
+      margin: .2rem 0;
+    }
+
+  }
+  .title{
+    background: #f95e5b;
+    color: #fff;
+    text-align: center;
+    padding: .2rem 0;
+    .copy-icon{
+      background: url('./assets/img/icon/copy-icon.png');
+      width: .4rem;
+      height: .4rem;
+      background-size: 100%;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: .2rem;
+    }
+    span{
+      vertical-align: middle;
+    }
+  }
+}
+.fixed-bottom{
+  height: 1rem;
+  position: fixed;
+  background: #fff;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 -3px 10px #dedede;
+  .password{
+    background: #000;
+    color: #fff;
+    font-size: .26rem;
+    height: 100%;
+    padding:0 .5rem;
+  }
+}
+.return-page{
+  position: absolute;
+  top: .2rem;
+  left: .2rem;
+  width: .6rem;
+  height: .6rem;
+  background: rgba(0,0,0,.8);
+  border-radius: 50%;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &::after{
+    content: '';
+    background: url(./assets/img/icon/return-page.png);
+    background-size: 100%;
+    width: .4rem;
+    height: .4rem;
+    display: block;
+    animation: return_page 1s infinite;
   }
 }

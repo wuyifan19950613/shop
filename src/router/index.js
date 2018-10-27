@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 const index = r => require.ensure([], () => r(require('@/components/index')), 'index');
 const search = r => require.ensure([], () => r(require('@/components/search/search')), 'search');
+const details = r => require.ensure([], () => r(require('@/components/details/details')), 'details');
 const homeContainers = r => require.ensure([], () => r(require('@/components/containers/homeContainers')), 'homeContainers');
 
 Vue.use(Router)
@@ -42,6 +43,17 @@ const router = new Router({
           },
         },
       ],
+    },
+    // 搜索页
+    {
+      path: '/details',
+      name: 'details',
+      component: details,
+      meta: {
+        title: '商品详情',
+        keywords: '',
+        description: ''
+      },
     },
   ],
 })

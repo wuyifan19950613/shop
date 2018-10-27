@@ -42,3 +42,21 @@ ul,li,ol{
     opacity: 1;
   }
 }
+.ib{
+  display: inline-block;
+  position: relative;
+}
+.flex{
+  display: flex;
+}
+.fe{
+  flex: 1;
+}
+.fe-center{
+  justify-content: center;
+  align-items: center;
+}
+a{
+  text-decoration: none;
+  color: #333;
+}

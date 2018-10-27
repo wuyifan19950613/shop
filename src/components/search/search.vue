@@ -2,7 +2,7 @@
   <div id="">
     <div class="serch-box md10">
       <i class="serch-icon"></i>
-      <input name="search" placeholder="Red Charcoal × Staple重磅来袭！" type="text" v-model="search_val">
+      <input name="search" placeholder="Red Charcoal × Staple重磅来袭！" v-focus type="text" v-model="search_val">
       <div class="search-btn" @click="search_btn">查询</div>
     </div>
     <div class="hot-search md10">
@@ -93,6 +93,13 @@ export default {
   data() {
     return{
       search_val: '',
+    }
+  },
+  directives: {
+    focus: {
+      inserted: function (el) {
+        el.focus()
+      }
     }
   },
   methods: {
