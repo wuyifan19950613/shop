@@ -11,7 +11,7 @@ export default {
   mounted() {
     const vds = document.createElement('script')
     vds.type = 'text/javascript'
-    vds.async = true
+    vds.async = true;
     vds.src = (document.location.protocol === 'https:' ? 'https://' : 'http://') +
       's5.cnzz.com/z_stat.php?id=1275250107&web_id=1275250107'
     const s = document.getElementsByTagName('script')[0]
