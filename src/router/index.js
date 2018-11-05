@@ -21,7 +21,7 @@ const router = new Router({
       name: 'index',
       component: index,
       meta: {
-        title: '小欢优惠劵',
+        title: '精选淘宝天猫优惠卷-小欢有劵',
         keywords: '',
         description: ''
       },
