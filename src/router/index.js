@@ -21,7 +21,7 @@ const router = new Router({
       name: 'index',
       component: index,
       meta: {
-        title: '小白优惠商城',
+        title: '小欢优惠劵',
         keywords: '',
         description: ''
       },
