@@ -414,6 +414,9 @@
   background-color: #fff;
   padding-top: 10%;
   box-sizing: border-box;
+  &.register{
+    background-image: url(./assets/img/icon/register-bj.jpg);
+  }
   .title{
     font-size: .32rem;
     font-weight: normal;
@@ -430,5 +433,132 @@
       height: .8rem;
       outline: none;
     }
+  }
+}
+.admin-nav{
+  background: url('./assets/img/icon/home-nav.png');
+  width: .5rem;
+  height: .5rem;
+  background-size: 100%;
+  position: fixed;
+  top: .2rem;
+  right: .2rem;
+}
+.menu-list{
+  position: fixed;
+  top: .95rem;
+  right: 0;
+  background: #fff;
+  width: 40%;
+  z-index: 99;
+  height: calc(100% - .95rem);
+  transform: translateX(100%);
+  &.active{
+    animation: menu-list-active .3s forwards;
+  }
+  li{
+    font-size: .28rem;
+    text-align: center;
+    height: 1rem;
+    line-height: 1rem;
+    a{
+      display: block;
+    }
+  }
+}
+@keyframes menu-list-active{
+  0%{
+    transform: translateX(100%);
+  }
+  100%{
+    transform: translateX(0);
+  }
+}
+.grab-box{
+  display: flex;
+  .input-base{
+    flex:1;
+    margin-top: 0!important;
+  }
+  .grab-btn{
+    font-size: .28rem;
+    color: #fff;
+    background: #000;
+    display: flex;
+    align-items: center;
+    padding: 0 .2rem;
+  }
+}
+.homebanner{
+  padding: .2rem;
+  .imgurl{
+    margin-top: .2rem;
+    width: 100%;
+    height: 2rem;
+    resize: none;
+    padding: .2rem;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    display: block;
+  }
+  .input-base{
+    width: 100%;
+    border: none;
+    line-height: .2rem;
+    padding: .2rem;
+    box-sizing: border-box;
+    outline: none;
+    display: block;
+    margin-top: .2rem;
+  }
+  .price{
+    display: flex;
+    .left{
+      margin-right: .1rem;
+    }
+    .right{
+      margin-left: .1rem;
+    }
+  }
+  .coupon{
+    display: flex;
+    .left{
+      margin-right: .1rem;
+    }
+    .right{
+      margin-left: .1rem;
+    }
+  }
+}
+.add-btn{
+  width: 4rem;
+  text-align: center;
+  line-height: 1rem;
+  color: #fff;
+  background: #000;
+  margin: 2rem auto;
+}
+.show-pic{
+  margin-top: .2rem;
+  text-align: center;
+  .pic-box{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .up-pic{
+    text-align: center;
+    display: inline-block;
+    font-size: .28rem;
+    background: #000;
+    color: #fff;
+    padding: .1rem;
+  }
+  img{
+    width: 30%;
+    min-width: 30%;
+    max-width: 30%;
+    height: 2.6rem;
+    margin: .1rem;
   }
 }

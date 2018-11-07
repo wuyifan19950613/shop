@@ -12,7 +12,6 @@ export default {
   name: "commonHeader",
   data() {
     return {
-      title: "fdas"
     };
   },
   computed: {},
