@@ -5,6 +5,8 @@ const index = r => require.ensure([], () => r(require('@/components/index')), 'i
 const search = r => require.ensure([], () => r(require('@/components/search/search')), 'search');
 const details = r => require.ensure([], () => r(require('@/components/details/details')), 'details');
 const homeContainers = r => require.ensure([], () => r(require('@/components/containers/homeContainers')), 'homeContainers');
+// 登录
+import admin from '@/router/admin';
 
 Vue.use(Router)
 
@@ -14,6 +16,12 @@ const router = new Router({
     {
       path: '',
       redirect: '/index',
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: homeContainers,
+      children: admin,
     },
     // 首页
     {

@@ -401,3 +401,34 @@
     animation: return_page 1s infinite;
   }
 }
+.admin{
+  position: fixed;
+  top: .95rem;;
+  left: 0;
+  width: 100%;
+  height: calc(100% - .95rem);
+  background-image: url(./assets/img/icon/login-bj.jpg);
+  background-size: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  padding-top: 10%;
+  box-sizing: border-box;
+  .title{
+    font-size: .32rem;
+    font-weight: normal;
+    text-align: center;
+  }
+  .admin-input-box{
+    margin-top: 1rem;
+    input[name="username"],input[name="password"]{
+      display: block;
+      width: 80%;
+      margin: .2rem auto;
+      border: none;
+      border-bottom: 1px solid #000;
+      height: .8rem;
+      outline: none;
+    }
+  }
+}
