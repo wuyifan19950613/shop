@@ -537,7 +537,7 @@
   line-height: 1rem;
   color: #fff;
   background: #000;
-  margin: 2rem auto;
+  margin: 1rem auto;
 }
 .show-pic{
   margin-top: .2rem;
@@ -566,4 +566,87 @@
   margin-top: .2rem;
   background: #fff;
   padding: .2rem;
+}
+.loading{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background: #fff;
+  .loading-main{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: .24rem;
+    div{
+      margin-top: .2rem;
+    }
+  }
+}
+.main-content{
+  &::after{
+    content: '';
+    height: .95rem;
+    display: block;
+  }
+}
+.guess-lick{
+  background: #fff;
+  margin-top: .2rem;
+  .like-commdity{
+    padding: .1rem;
+    display: flex;
+    li{
+      width: 50%;
+      padding: .1rem;
+      margin: .1rem;
+      box-sizing: border-box;
+      border: 1px solid #000;
+      img{
+        display: block;
+      }
+      .commdity-info{
+        .title{
+          font-size: .24rem;
+          padding-top: .1rem;
+          font-weight: normal;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+        .coupon{
+          margin-top: .16rem;
+          font-size: .24rem;
+          color: #b0b0b0;
+          .mx{
+            background: #f95e5b;
+            color: #fff;
+            padding: .05rem;
+          }
+          .money{
+            color: #f95e5b;
+          }
+        }
+        .mark{
+          margin-top: .1rem;
+          display: flex;
+          justify-content: space-between;
+          font-size: .24rem;
+          color: #b0b0b0;
+          .left{
+            b{
+              text-decoration: line-through;
+              font-weight: normal;
+            }
+          }
+        }
+      }
+    }
+  }
 }

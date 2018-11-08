@@ -4,10 +4,10 @@
       <input class="input-base" type="text" v-model="grabUrl" placeholder="请输入想抓取的页面地址">
       <div class="grab-btn" @click="goGrab">抓取</div>
     </div>
-    <textarea @blur="inputFun" class="imgurl" v-model="commInfo.bannerModel" placeholder="请输入图片链接，多张图片请用逗号隔开!"></textarea>
+    <textarea class="imgurl" v-model="bannerModel" placeholder="请输入图片链接，多张图片请用逗号隔开!"></textarea>
     <div class="show-pic">
       <div class="pic-box" v-show="picShow">
-        <img :src="t" alt="" v-for="(t, i) in showPic" :key="i">
+        <img :src="t" alt="" v-for="(t, i) in commInfo.showPic" :key="i">
       </div>
       <div class="up-pic" @click="picShow ? picShow = false : picShow = true">{{picShow ? '收起图片': '展开图片'}}</div>
     </div>
@@ -39,9 +39,10 @@ export default {
   name: "",
   data() {
     return{
+      bannerModel: '',
       commInfo: {
         title: '',
-        bannerModel: [],
+        showPic: [],
         PrePrice: '',
         voucher: '',
         Sales: '',
@@ -52,7 +53,6 @@ export default {
         type: '',
       },
       grabUrl: '',
-      showPic: [],
       picShow: false,
     }
   },
@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     addGoodsClick() {
+      this.bannerSplit();
       if (this.commInfo.title === '') {
         this.$toast({
           message: '商品名称必填',
@@ -68,6 +69,7 @@ export default {
           className: 'toast-success',
           duration: '2000',
         });
+        return false;
       } else if (this.commInfo.type === '') {
         this.$toast({
           message: '商品类型必填',
@@ -75,6 +77,7 @@ export default {
           className: 'toast-success',
           duration: '2000',
         });
+        return false;
       } else if (this.commInfo.token === '') {
         this.$toast({
           message: '淘口令必填',
@@ -82,6 +85,7 @@ export default {
           className: 'toast-success',
           duration: '2000',
         });
+        return false;
       } else if (this.commInfo.singleLink === '') {
         this.$toast({
           message: '下单链接必填',
@@ -89,6 +93,7 @@ export default {
           className: 'toast-success',
           duration: '2000',
         });
+        return false;
       } else if (this.commInfo.PrePrice === '') {
         this.$toast({
           message: '商品现价必填',
@@ -96,20 +101,23 @@ export default {
           className: 'toast-success',
           duration: '2000',
         });
-      } else if (this.commInfo.bannerModel.length <= 0) {
+        return false;
+      } else if (this.commInfo.showPic.length <= 0) {
         this.$toast({
           message: '商品图片至少一张',
           position: 'top',
           className: 'toast-success',
           duration: '2000',
         });
+        return false;
       }
       this.addGoods(this.commInfo).then((res) => {
         if(res.data.code === 200) {
+          this.bannerModel = [];
           this.commInfo = {
             title: '',
             bannerModel: [],
-            PrePrice: '',
+            showPic: '',
             voucher: '',
             Sales: '',
             couponMoney: '',
@@ -134,13 +142,10 @@ export default {
         }
       })
     },
-    inputFun() {
-      this.bannerSplit();
-    },
     bannerSplit() {
-      const urls = this.commInfo.bannerModel.split(",");
+      const urls = this.bannerModel.split(",");
       for (let i = 0; i < urls.length; i += 1) {
-        this.showPic.push(urls[i]);
+        this.commInfo.showPic.push(urls[i]);
       }
     },
     goGrab() {
@@ -153,9 +158,7 @@ export default {
         });
         return false;
       }
-      this.GrabInfo({url: this.grabUrl}).then((res) => {
-        console.log(res);
-      });
+      this.GrabInfo({url: this.grabUrl});
     },
     ...mapActions('admin', [
       'GrabInfo',

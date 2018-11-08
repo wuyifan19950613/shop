@@ -15,11 +15,13 @@ import VueClipboard from 'vue-clipboard2' // 复制到剪切板
 import ls from '@/utils/localStorage';
 
 const commonHeader = r => require.ensure([], () => r(require('@/components/global/commonHeader')), 'commonHeader');
+const loading = r => require.ensure([], () => r(require('@/components/modules/loading')), 'loading');
 
 // mint-ui 按需加载
 Vue.prototype.$toast = Toast;
 Vue.component('swiper', swiper);
 Vue.component('swiper-slide', swiperSlide);
+Vue.component('loading', loading);
 Vue.component(Header.name, Header);
 Vue.component(Button.name, Button);
 // 本地localStorage储存

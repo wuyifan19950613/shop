@@ -48,301 +48,26 @@
         </swiper-slide>
       </swiper>
       <ul class="recommend-list">
-        <li>
+        <li v-if="typeCommodity" v-for="(t, i) in allList[nav_active]" :key="i">
             <div class="img-url">
-              <router-link :to="{ path: 'details'}">
-                <img class="" src="http://img.alicdn.com/imgextra/i4/2578900982/TB2KhBtcOLaK1RjSZFxXXamPFXa_!!2578900982.jpg_200x200.jpg" alt="">
+              <router-link :to="{ path: 'details', query: {id: t._id}}">
+                <img class="" :src="t.showPic[0]" alt="">
               </router-link>
             </div>
             <div class="commodity">
-              <router-link :to="{ path: 'details'}">
+              <router-link :to="{ path: 'details', query: {id: t._id}}">
                 <h1 class="commodity-title">
-                  OralB/欧乐B电动牙刷D100米奇限量男女成人款软毛旋转声波小圆头
+                  {{t.title}}
                 </h1>
                 <div class="price">
-                  <span class="sale-price">¥774.00</span>
-                  <span class="market-price">¥1290.00</span>
+                  <span class="sale-price">¥{{t.voucher}}</span>
+                  <span class="market-price">¥{{t.PrePrice}}</span>
                 </div>
                 <div class="progress">
                   <span class="count-coupon">剩余100000</span>
                   <div class="used-coupon" style="width:50%;">
                     <span class="j">劵</span>
-                    <span>35元</span>
-                  </div>
-                </div>
-              </router-link>
-            </div>
-        </li>
-        <li>
-            <div class="img-url">
-              <router-link :to="{ path: 'details'}">
-                <img class="" src="http://img.alicdn.com/imgextra/i4/2578900982/TB2KhBtcOLaK1RjSZFxXXamPFXa_!!2578900982.jpg_200x200.jpg" alt="">
-              </router-link>
-            </div>
-            <div class="commodity">
-              <router-link :to="{ path: 'details'}">
-                <h1 class="commodity-title">
-                  OralB/欧乐B电动牙刷D100米奇限量男女成人款软毛旋转声波小圆头
-                </h1>
-                <div class="price">
-                  <span class="sale-price">¥774.00</span>
-                  <span class="market-price">¥1290.00</span>
-                </div>
-                <div class="progress">
-                  <span class="count-coupon">剩余100000</span>
-                  <div class="used-coupon" style="width:50%;">
-                    <span class="j">劵</span>
-                    <span>35元</span>
-                  </div>
-                </div>
-              </router-link>
-            </div>
-        </li>
-        <li>
-            <div class="img-url">
-              <router-link :to="{ path: 'details'}">
-                <img class="" src="http://img.alicdn.com/imgextra/i4/2578900982/TB2KhBtcOLaK1RjSZFxXXamPFXa_!!2578900982.jpg_200x200.jpg" alt="">
-              </router-link>
-            </div>
-            <div class="commodity">
-              <router-link :to="{ path: 'details'}">
-                <h1 class="commodity-title">
-                  OralB/欧乐B电动牙刷D100米奇限量男女成人款软毛旋转声波小圆头
-                </h1>
-                <div class="price">
-                  <span class="sale-price">¥774.00</span>
-                  <span class="market-price">¥1290.00</span>
-                </div>
-                <div class="progress">
-                  <span class="count-coupon">剩余100000</span>
-                  <div class="used-coupon" style="width:50%;">
-                    <span class="j">劵</span>
-                    <span>35元</span>
-                  </div>
-                </div>
-              </router-link>
-            </div>
-        </li>
-        <li>
-            <div class="img-url">
-              <router-link :to="{ path: 'details'}">
-                <img class="" src="http://img.alicdn.com/imgextra/i4/2578900982/TB2KhBtcOLaK1RjSZFxXXamPFXa_!!2578900982.jpg_200x200.jpg" alt="">
-              </router-link>
-            </div>
-            <div class="commodity">
-              <router-link :to="{ path: 'details'}">
-                <h1 class="commodity-title">
-                  OralB/欧乐B电动牙刷D100米奇限量男女成人款软毛旋转声波小圆头
-                </h1>
-                <div class="price">
-                  <span class="sale-price">¥774.00</span>
-                  <span class="market-price">¥1290.00</span>
-                </div>
-                <div class="progress">
-                  <span class="count-coupon">剩余100000</span>
-                  <div class="used-coupon" style="width:50%;">
-                    <span class="j">劵</span>
-                    <span>35元</span>
-                  </div>
-                </div>
-              </router-link>
-            </div>
-        </li>
-        <li>
-            <div class="img-url">
-              <router-link :to="{ path: 'details'}">
-                <img class="" src="http://img.alicdn.com/imgextra/i4/2578900982/TB2KhBtcOLaK1RjSZFxXXamPFXa_!!2578900982.jpg_200x200.jpg" alt="">
-              </router-link>
-            </div>
-            <div class="commodity">
-              <router-link :to="{ path: 'details'}">
-                <h1 class="commodity-title">
-                  OralB/欧乐B电动牙刷D100米奇限量男女成人款软毛旋转声波小圆头
-                </h1>
-                <div class="price">
-                  <span class="sale-price">¥774.00</span>
-                  <span class="market-price">¥1290.00</span>
-                </div>
-                <div class="progress">
-                  <span class="count-coupon">剩余100000</span>
-                  <div class="used-coupon" style="width:50%;">
-                    <span class="j">劵</span>
-                    <span>35元</span>
-                  </div>
-                </div>
-              </router-link>
-            </div>
-        </li>
-        <li>
-            <div class="img-url">
-              <router-link :to="{ path: 'details'}">
-                <img class="" src="http://img.alicdn.com/imgextra/i4/2578900982/TB2KhBtcOLaK1RjSZFxXXamPFXa_!!2578900982.jpg_200x200.jpg" alt="">
-              </router-link>
-            </div>
-            <div class="commodity">
-              <router-link :to="{ path: 'details'}">
-                <h1 class="commodity-title">
-                  OralB/欧乐B电动牙刷D100米奇限量男女成人款软毛旋转声波小圆头
-                </h1>
-                <div class="price">
-                  <span class="sale-price">¥774.00</span>
-                  <span class="market-price">¥1290.00</span>
-                </div>
-                <div class="progress">
-                  <span class="count-coupon">剩余100000</span>
-                  <div class="used-coupon" style="width:50%;">
-                    <span class="j">劵</span>
-                    <span>35元</span>
-                  </div>
-                </div>
-              </router-link>
-            </div>
-        </li>
-        <li>
-            <div class="img-url">
-              <router-link :to="{ path: 'details'}">
-                <img class="" src="http://img.alicdn.com/imgextra/i4/2578900982/TB2KhBtcOLaK1RjSZFxXXamPFXa_!!2578900982.jpg_200x200.jpg" alt="">
-              </router-link>
-            </div>
-            <div class="commodity">
-              <router-link :to="{ path: 'details'}">
-                <h1 class="commodity-title">
-                  OralB/欧乐B电动牙刷D100米奇限量男女成人款软毛旋转声波小圆头
-                </h1>
-                <div class="price">
-                  <span class="sale-price">¥774.00</span>
-                  <span class="market-price">¥1290.00</span>
-                </div>
-                <div class="progress">
-                  <span class="count-coupon">剩余100000</span>
-                  <div class="used-coupon" style="width:50%;">
-                    <span class="j">劵</span>
-                    <span>35元</span>
-                  </div>
-                </div>
-              </router-link>
-            </div>
-        </li>
-        <li>
-            <div class="img-url">
-              <router-link :to="{ path: 'details'}">
-                <img class="" src="http://img.alicdn.com/imgextra/i4/2578900982/TB2KhBtcOLaK1RjSZFxXXamPFXa_!!2578900982.jpg_200x200.jpg" alt="">
-              </router-link>
-            </div>
-            <div class="commodity">
-              <router-link :to="{ path: 'details'}">
-                <h1 class="commodity-title">
-                  OralB/欧乐B电动牙刷D100米奇限量男女成人款软毛旋转声波小圆头
-                </h1>
-                <div class="price">
-                  <span class="sale-price">¥774.00</span>
-                  <span class="market-price">¥1290.00</span>
-                </div>
-                <div class="progress">
-                  <span class="count-coupon">剩余100000</span>
-                  <div class="used-coupon" style="width:50%;">
-                    <span class="j">劵</span>
-                    <span>35元</span>
-                  </div>
-                </div>
-              </router-link>
-            </div>
-        </li>
-        <li>
-            <div class="img-url">
-              <router-link :to="{ path: 'details'}">
-                <img class="" src="http://img.alicdn.com/imgextra/i4/2578900982/TB2KhBtcOLaK1RjSZFxXXamPFXa_!!2578900982.jpg_200x200.jpg" alt="">
-              </router-link>
-            </div>
-            <div class="commodity">
-              <router-link :to="{ path: 'details'}">
-                <h1 class="commodity-title">
-                  OralB/欧乐B电动牙刷D100米奇限量男女成人款软毛旋转声波小圆头
-                </h1>
-                <div class="price">
-                  <span class="sale-price">¥774.00</span>
-                  <span class="market-price">¥1290.00</span>
-                </div>
-                <div class="progress">
-                  <span class="count-coupon">剩余100000</span>
-                  <div class="used-coupon" style="width:50%;">
-                    <span class="j">劵</span>
-                    <span>35元</span>
-                  </div>
-                </div>
-              </router-link>
-            </div>
-        </li>
-        <li>
-            <div class="img-url">
-              <router-link :to="{ path: 'details'}">
-                <img class="" src="http://img.alicdn.com/imgextra/i4/2578900982/TB2KhBtcOLaK1RjSZFxXXamPFXa_!!2578900982.jpg_200x200.jpg" alt="">
-              </router-link>
-            </div>
-            <div class="commodity">
-              <router-link :to="{ path: 'details'}">
-                <h1 class="commodity-title">
-                  OralB/欧乐B电动牙刷D100米奇限量男女成人款软毛旋转声波小圆头
-                </h1>
-                <div class="price">
-                  <span class="sale-price">¥774.00</span>
-                  <span class="market-price">¥1290.00</span>
-                </div>
-                <div class="progress">
-                  <span class="count-coupon">剩余100000</span>
-                  <div class="used-coupon" style="width:50%;">
-                    <span class="j">劵</span>
-                    <span>35元</span>
-                  </div>
-                </div>
-              </router-link>
-            </div>
-        </li>
-        <li>
-            <div class="img-url">
-              <router-link :to="{ path: 'details'}">
-                <img class="" src="http://img.alicdn.com/imgextra/i4/2578900982/TB2KhBtcOLaK1RjSZFxXXamPFXa_!!2578900982.jpg_200x200.jpg" alt="">
-              </router-link>
-            </div>
-            <div class="commodity">
-              <router-link :to="{ path: 'details'}">
-                <h1 class="commodity-title">
-                  OralB/欧乐B电动牙刷D100米奇限量男女成人款软毛旋转声波小圆头
-                </h1>
-                <div class="price">
-                  <span class="sale-price">¥774.00</span>
-                  <span class="market-price">¥1290.00</span>
-                </div>
-                <div class="progress">
-                  <span class="count-coupon">剩余100000</span>
-                  <div class="used-coupon" style="width:50%;">
-                    <span class="j">劵</span>
-                    <span>35元</span>
-                  </div>
-                </div>
-              </router-link>
-            </div>
-        </li>
-        <li>
-            <div class="img-url">
-              <router-link :to="{ path: 'details'}">
-                <img class="" src="http://img.alicdn.com/imgextra/i4/2578900982/TB2KhBtcOLaK1RjSZFxXXamPFXa_!!2578900982.jpg_200x200.jpg" alt="">
-              </router-link>
-            </div>
-            <div class="commodity">
-              <router-link :to="{ path: 'details'}">
-                <h1 class="commodity-title">
-                  OralB/欧乐B电动牙刷D100米奇限量男女成人款软毛旋转声波小圆头
-                </h1>
-                <div class="price">
-                  <span class="sale-price">¥774.00</span>
-                  <span class="market-price">¥1290.00</span>
-                </div>
-                <div class="progress">
-                  <span class="count-coupon">剩余100000</span>
-                  <div class="used-coupon" style="width:50%;">
-                    <span class="j">劵</span>
-                    <span>35元</span>
+                    <span>{{t.couponMoney}}元</span>
                   </div>
                 </div>
               </router-link>
@@ -354,6 +79,8 @@
   </div>
 </template>
 <script>
+import { mapActions, mapState } from 'vuex';
+
 export default {
   name: "index",
   data() {
@@ -362,6 +89,7 @@ export default {
       nav_active: 0,
       domeScrollTop: 0,
       navSwiperFiexd: false,
+      allList: [],
       init: {
         offsetTop: '',
       },
@@ -451,6 +179,15 @@ export default {
              swiper.setTranslate(-nowTlanslate);
             }
             this.nav_active = clickIndex;
+            this.findCommodity({type: clickIndex}).then((res)=> {
+              let shoplist = [];
+              for(let i = 0; i < this.typeCommodity.data.length; i += 1) {
+                shoplist.push(this.typeCommodity.data[i]);
+                this.$set(this.allList, [clickIndex], shoplist);
+              }
+              console.log(this.allList)
+
+            })
             // document.documentElement.scrollTop = offsetTop - 50;
             // this.navSwiperFiexd = true;
            },
@@ -487,10 +224,14 @@ export default {
     this.init.offsetTop = this.navSwiper.$el[0].offsetTop;
   },
   methods: {
+    ...mapActions([
+      'findCommodity'
+    ]),
     // 监听滚动
     addEvent(obj, callback) {
       window.addEventListener(obj, callback);
     },
+
     handleScroll() {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       this.domeScrollTop = scrollTop;
@@ -508,12 +249,15 @@ export default {
       if (scrollTop < offsetTop) {
         this.navSwiperFiexd = false;
       }
-    }
+    },
   },
   computed: {
     navSwiper() {
        return this.$refs.navSwiper.swiper
-    }
+    },
+    ...mapState([
+      'typeCommodity',
+    ]),
   },
 
 }

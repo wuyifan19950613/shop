@@ -10,12 +10,42 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   // 严格模式（开启后所有状态必须走mutations）
   strict: process.env.NODE_ENV !== 'production',
+  namespaced: true,
   // 根状态（全局状态）
-  state: {},
+  state: {
+    typeCommodity: {}, // 商品类型列表存放
+    SingleCommodity:{}, // 单个商品存放
+  },
   // mutations,
-  mutations: {},
+  mutations: {
+    setfindCommodity(state, data) {
+      state.typeCommodity = data;
+    },
+    setSingleCommodity(state, data) {
+      state.SingleCommodity = data;
+    },
+  },
   // actions,
-  actions: {},
+  actions: {
+    async findCommodity({ commit }, data) {
+      const result = await http.get('/api/find/typeCommodity', {
+        params: data,
+      });
+      if (!result) {
+        return;
+      }
+      commit('setfindCommodity', result.data);
+    },
+    async findCommodityId({ commit }, data) {
+      const result = await http.get('/api/find/CommodityId', {
+        params: data,
+      });
+      if (!result) {
+        return;
+      }
+      commit('setSingleCommodity', result.data);
+    },
+  },
   // plugins,
   plugins: [],
   // modules
