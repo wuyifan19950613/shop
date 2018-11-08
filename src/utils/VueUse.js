@@ -12,6 +12,8 @@ import {
 } from 'mint-ui';
 import VueLazyLoad from 'vue-lazyload';
 import VueClipboard from 'vue-clipboard2' // 复制到剪切板
+import ls from '@/utils/localStorage';
+
 const commonHeader = r => require.ensure([], () => r(require('@/components/global/commonHeader')), 'commonHeader');
 
 // mint-ui 按需加载
@@ -20,7 +22,8 @@ Vue.component('swiper', swiper);
 Vue.component('swiper-slide', swiperSlide);
 Vue.component(Header.name, Header);
 Vue.component(Button.name, Button);
-
+// 本地localStorage储存
+Vue.use(ls);
 Vue.use(VueClipboard)
 // 图片懒加载
 Vue.use(VueLazyLoad,{

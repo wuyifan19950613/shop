@@ -37,6 +37,9 @@ export default {
             className: 'toast-success',
             duration: '2000',
           });
+          this.$setLS({
+            user: res.data.userInfo,
+          });
           setTimeout(() => {
             this.$router.push('/admin/index');
           },2000)

@@ -20,5 +20,8 @@ export default {
       }
       commit('setCaptureData', result.data);
     },
+    addGoods(content, data){
+      return http.post('/api/add/goods', data);
+    }
   },
 };

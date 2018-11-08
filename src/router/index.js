@@ -70,7 +70,20 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title;
 
   const thisVue = Vue.prototype;
-  next();
+  if (to.meta.requireAuth) {
+    const userInfo = thisVue.$getLS('user');
+    if (!userInfo && userInfo.token !== '5be27d7cef210e69a0e6816c') {
+      next({
+        path: '/admin/login',
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+
+
 });
 
 export default router;

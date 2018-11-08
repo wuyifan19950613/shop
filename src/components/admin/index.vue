@@ -16,6 +16,8 @@
         </router-link>
       </li>
     </ul>
+
+    <div class="add-btn" @click="outLogin">退出登录</div>
   </div>
 </template>
 <script>
@@ -26,6 +28,16 @@ export default {
       navShow: false,
     }
   },
+  methods: {
+    outLogin() {
+      this.$setLS({
+        user: '',
+      });
+      this.$router.push({
+        path: '/admin/login',
+      });
+    },
+  }
 }
 </script>
 <style lang="scss" scoped>

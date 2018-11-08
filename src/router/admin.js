@@ -24,6 +24,7 @@ export default [
     component: nicewhere,
     meta: {
       title: '好的都在这里管理',
+      requireAuth: true,
     },
   },
   {
@@ -32,6 +33,7 @@ export default [
     component: hotshop,
     meta: {
       title: '热门商品管理',
+      requireAuth: true,
     },
   },
   {
@@ -40,6 +42,7 @@ export default [
     component: homebanner,
     meta: {
       title: '首页banner管理',
+      requireAuth: true,
     },
   },
   {
@@ -56,6 +59,7 @@ export default [
     component: index,
     meta: {
       title: '后台管理',
+      requireAuth: true,
     },
   },
 ]
