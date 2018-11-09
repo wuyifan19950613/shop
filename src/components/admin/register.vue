@@ -17,8 +17,8 @@ export default {
   name: "",
   data(){
     return{
-      userName: '502397665@qq.com',
-      password: 'wuyifan1995',
+      userName: '',
+      password: '',
     }
   },
   methods: {
