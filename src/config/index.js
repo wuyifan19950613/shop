@@ -1,5 +1,5 @@
 const devBaseURL = 'http://192.168.80.16:3000';
-const proBaseURL = 'http://api.xiaohuanzi.cn/';
+const proBaseURL = 'https://shop.xiaohuanzi.cn/';
 
 // 分享地址
 const fxurl = '';
