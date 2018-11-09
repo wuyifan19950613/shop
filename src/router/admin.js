@@ -8,7 +8,7 @@ const nicewhere = r => require.ensure([], () => r(require('@/components/admin/ni
 export default [
   {
     path: '',
-    redirect: 'login',
+    redirect: 'index',
   },
   {
     path: 'login',

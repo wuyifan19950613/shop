@@ -27,6 +27,7 @@
     </div>
     <div class="coupon">
       <input class="input-base left" type="number" v-model="commInfo.type" placeholder="请输入商品类型">
+      <input class="input-base right" type="text" v-model="commInfo.Label" placeholder="请输入商品标签以逗号分隔">
     </div>
     <div class="shoptype">商品类型：0:综合,1:女装,2:家居家装,3:数码家电,4:母婴,5:食品,6:鞋包配饰,7:美妆个护,8:男装,9:内衣,10:运动户外,11:天猫国际,12:双11精选</div>
     <div class="add-btn" @click="addGoodsClick">添加</div>
@@ -51,6 +52,7 @@ export default {
         singleLink: '',
         token: '',
         type: '',
+        Label: '',
       },
       grabUrl: '',
       picShow: false,
@@ -125,6 +127,7 @@ export default {
             singleLink: '',
             token: '',
             type: '',
+            Label: '',
           };
           this.$toast({
             message: res.data.message,

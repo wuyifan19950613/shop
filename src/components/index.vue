@@ -3,7 +3,7 @@
     <!--  查询商品input start-->
     <div class="serch-commodity">
       <div :class="`serch-content ${backActive}`">
-        <router-link :to="{ path: 'search'}">
+        <router-link :to="{ path: '/commodity/search'}">
           <input name="search" type="text" placeholder="请输入搜索文字">
         </router-link>
       </div>
@@ -49,29 +49,28 @@
       </swiper>
       <ul class="recommend-list">
         <li v-if="typeCommodity" v-for="(t, i) in allList[nav_active]" :key="i">
+          <router-link :to="{ path: '/commodity/details', query: {id: t._id, Label: t.Label}}">
             <div class="img-url">
-              <router-link :to="{ path: 'details', query: {id: t._id}}">
                 <img class="" :src="t.showPic[0]" alt="">
-              </router-link>
             </div>
             <div class="commodity">
-              <router-link :to="{ path: 'details', query: {id: t._id}}">
-                <h1 class="commodity-title">
-                  {{t.title}}
-                </h1>
-                <div class="price">
-                  <span class="sale-price">¥{{t.voucher}}</span>
-                  <span class="market-price">¥{{t.PrePrice}}</span>
+              <h1 class="commodity-title">
+                {{t.title}}
+              </h1>
+              <div class="price">
+                <span class="sale-price">¥{{t.voucher}}</span>
+                <span class="market-price">¥{{t.PrePrice}}</span>
+              </div>
+              <div class="progress">
+                <span class="count-coupon">剩余100000</span>
+                <div class="used-coupon" style="width:50%;">
+                  <span class="j">劵</span>
+                  <span>{{t.couponMoney}}元</span>
                 </div>
-                <div class="progress">
-                  <span class="count-coupon">剩余100000</span>
-                  <div class="used-coupon" style="width:50%;">
-                    <span class="j">劵</span>
-                    <span>{{t.couponMoney}}元</span>
-                  </div>
-                </div>
-              </router-link>
+              </div>
             </div>
+          </router-link>
+
         </li>
       </ul>
     </div>
@@ -155,7 +154,7 @@ export default {
         notNextTick: true,
         freeMode: true,
         on:{
-           tap:() => {
+           click:() => {
              let nowTlanslate;
             const swiper = this.$refs.navSwiper.swiper;
             const swiperWidth = swiper.$el[0].clientWidth;
@@ -185,9 +184,7 @@ export default {
                 shoplist.push(this.typeCommodity.data[i]);
                 this.$set(this.allList, [clickIndex], shoplist);
               }
-              console.log(this.allList)
-
-            })
+            });
             // document.documentElement.scrollTop = offsetTop - 50;
             // this.navSwiperFiexd = true;
            },
@@ -222,6 +219,13 @@ export default {
     // window.addEventListener('scroll', this.handleScroll);
     this.addEvent('scroll', this.handleScroll);
     this.init.offsetTop = this.navSwiper.$el[0].offsetTop;
+    this.findCommodity().then((res)=> {
+      let shoplist = [];
+      for(let i = 0; i < this.typeCommodity.data.length; i += 1) {
+        shoplist.push(this.typeCommodity.data[i]);
+        this.$set(this.allList, [this.nav_active], shoplist);
+      }
+    });
   },
   methods: {
     ...mapActions([

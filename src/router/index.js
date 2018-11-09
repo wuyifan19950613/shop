@@ -2,11 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const index = r => require.ensure([], () => r(require('@/components/index')), 'index');
-const search = r => require.ensure([], () => r(require('@/components/search/search')), 'search');
-const details = r => require.ensure([], () => r(require('@/components/details/details')), 'details');
+const details = r => require.ensure([], () => r(require('@/components/commodity/details')), 'details');
 const homeContainers = r => require.ensure([], () => r(require('@/components/containers/homeContainers')), 'homeContainers');
 // 登录
 import admin from '@/router/admin';
+import commodity from '@/router/commodity';
 
 Vue.use(Router)
 
@@ -34,34 +34,23 @@ const router = new Router({
         description: ''
       },
     },
-    // 搜索页
+    // 宝贝详情
     {
-      path: '/search',
-      name: 'homeContainers',
-      component: homeContainers,
-      children: [
-        {
-          path: '',
-          name: 'search',
-          component: search,
-          meta: {
-            title: '搜索宝贝',
-            keywords: '',
-            description: ''
-          },
-        },
-      ],
-    },
-    // 搜索页
-    {
-      path: '/details',
+      path: '/commodity/details',
       name: 'details',
       component: details,
       meta: {
-        title: '商品详情',
+        title: '精选淘宝天猫优惠卷-小欢有劵',
         keywords: '',
         description: ''
       },
+    },
+    // 商品
+    {
+      path: '/commodity',
+      name: 'commodity',
+      component: homeContainers,
+      children: commodity,
     },
   ],
 })
@@ -72,7 +61,7 @@ router.beforeEach((to, from, next) => {
   const thisVue = Vue.prototype;
   if (to.meta.requireAuth) {
     const userInfo = thisVue.$getLS('user');
-    if (!userInfo && userInfo.token !== '5be27d7cef210e69a0e6816c') {
+    if (!userInfo && userInfo.token) {
       next({
         path: '/admin/login',
       });

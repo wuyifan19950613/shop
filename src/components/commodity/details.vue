@@ -17,7 +17,7 @@
       <!--  商品描述/价格 start-->
       <div class="commodity-content">
         <h1>
-          <i class="source-icon"></i>
+          <!-- <i class="source-icon"></i> -->
           <span class="title">{{SingleCommodity.data.title}}</span>
         </h1>
         <div class="sale-price">
@@ -53,29 +53,31 @@
       </div>
       <!--  一键复制口令 end-->
       <!--  猜你喜欢start-->
-      <div class="guess-lick">
+      <div class="guess-lick" v-if="vaguefind">
         <div class="base-title">猜你喜欢</div>
         <ul class="like-commdity">
-          <li class="">
+          <li class="" v-for="(t, i) in vaguefind.data" :key="i">
+            <router-link :to="{ path: '/commodity/details', query: { id: t.id, Label: t.Label}}"></router-link>
             <div>
-              <img src="https://img.alicdn.com/bao/uploaded/i3/3461415546/O1CN011qq72oXMjD8K6MU_!!0-item_pic.jpg_300x300q90.jpg_.webp" alt="">
+              <img :src="t.showPic[0]" alt="">
             </div>
             <div class="commdity-info">
-              <h1 class="title">2018冬季新加绒加厚保暖高腰牛仔裤女韩版大码显瘦百搭小脚长裤子</h1>
-              <p class="mark"><span class="left">现价￥<b>59.9</b></span> <span>已售10086件</span></p>
+              <h1 class="title">{{t.title}}</h1>
+              <p class="mark"><span class="left">现价￥<b>{{t.PrePrice}}</b></span> <span>已售{{t.Sales}}件</span></p>
               <div class="coupon">
-                <span><b class="mx">劵后价</b><b class="money">￥10.10</b></span>
+                <p class="w-jg"><b class="mx">劵后价</b><b class="money"><span class="w-fh">￥</span>{{t.voucher}}</b></p>
               </div>
             </div>
+            <div class="coupon-info"><i class="coupon-icon"></i><span>{{t.couponMoney}}</span></div>
           </li>
-          <li class=""></li>
         </ul>
       </div>
       <!--  猜你喜欢end-->
       <!--  底部浮窗 start-->
       <div class="fixed-bottom flex fe-center">
         <div class="fe"></div>
-        <div class="password flex fe-center"  v-clipboard:copy="SingleCommodity.data.token" v-clipboard:success="onCopy" v-clipboard:error="onError">复制口令</div>
+        <div class="w-voucher flex fe-center" v-clipboard:copy="SingleCommodity.data.token" v-clipboard:success="onCopy" v-clipboard:error="onError">复制口令</div>
+        <a :href="SingleCommodity.data.singleLink" class="password flex fe-center"> 领劵购买</a>
       </div>
       <!--  底部浮窗 end-->
     </div>
@@ -100,13 +102,13 @@ export default {
   },
   mounted() {
     //do something after mounting vue instance
-    this.findCommodityId({id: this.$route.query.id}).then(()=> {
-
-    })
+    this.findCommodityId({id: this.$route.query.id});
+    this.vaguefindCommodity({Label:this.$route.query.Label, id: this.$route.query.id});
   },
   methods: {
     ...mapActions([
-      'findCommodityId'
+      'findCommodityId',
+      'vaguefindCommodity',
     ]),
     onCopy() {
       this.$toast({
@@ -130,7 +132,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'SingleCommodity'
+      'SingleCommodity',
+      'vaguefind',
     ])
   },
 }

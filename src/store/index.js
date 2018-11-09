@@ -15,6 +15,7 @@ export default new Vuex.Store({
   state: {
     typeCommodity: {}, // 商品类型列表存放
     SingleCommodity:{}, // 单个商品存放
+    vaguefind:{},
   },
   // mutations,
   mutations: {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     setSingleCommodity(state, data) {
       state.SingleCommodity = data;
+    },
+    setvaguefindCommodity(state, data) {
+      state.vaguefind = data;
     },
   },
   // actions,
@@ -45,6 +49,16 @@ export default new Vuex.Store({
       }
       commit('setSingleCommodity', result.data);
     },
+    async vaguefindCommodity({ commit }, data) {
+      const result = await http.get('/api/vaguefind/Commodity', {
+        params: data,
+      });
+      if (!result) {
+        return;
+      }
+      commit('setvaguefindCommodity', result.data);
+    },
+
   },
   // plugins,
   plugins: [],
