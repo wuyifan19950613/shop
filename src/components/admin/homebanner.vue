@@ -119,7 +119,7 @@ export default {
           this.commInfo = {
             title: '',
             bannerModel: [],
-            showPic: '',
+            showPic: [],
             voucher: '',
             Sales: '',
             couponMoney: '',
