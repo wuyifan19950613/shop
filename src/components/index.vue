@@ -62,8 +62,8 @@
                 <span class="market-price">¥{{t.PrePrice}}</span>
               </div>
               <div class="progress">
-                <span class="count-coupon">剩余100000</span>
-                <div class="used-coupon" style="width:50%;">
+                <!-- <span class="count-coupon">剩余100000</span> -->
+                <div class="used-coupon" style="width:100%;">
                   <span class="j">劵</span>
                   <span>{{t.couponMoney}}元</span>
                 </div>
@@ -219,13 +219,15 @@ export default {
     // window.addEventListener('scroll', this.handleScroll);
     this.addEvent('scroll', this.handleScroll);
     this.init.offsetTop = this.navSwiper.$el[0].offsetTop;
-    this.findCommodity().then((res)=> {
-      let shoplist = [];
-      for(let i = 0; i < this.typeCommodity.data.length; i += 1) {
-        shoplist.push(this.typeCommodity.data[i]);
-        this.$set(this.allList, [this.nav_active], shoplist);
-      }
-    });
+    if (this.allList[this.nav_active] == undefined) {
+      this.findCommodity().then((res)=> {
+        let shoplist = [];
+        for(let i = 0; i < this.typeCommodity.data.length; i += 1) {
+          shoplist.push(this.typeCommodity.data[i]);
+          this.$set(this.allList, [this.nav_active], shoplist);
+        }
+      });
+    }
   },
   methods: {
     ...mapActions([
