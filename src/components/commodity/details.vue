@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <loading v-if="!SingleCommodity.data"></loading>
+    <loading v-if="!SingleCommodity.data && !vaguefind.data"></loading>
     <div class="main-content" v-else>
       <!--  商品主页banner start-->
       <div class="details-banner">
