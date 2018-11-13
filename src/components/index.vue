@@ -30,9 +30,9 @@
       <div class="base-title">热门品类</div>
       <ul class="commodity-list">
         <li class="" v-for="(item, index) in commodityUrl" :key="index">
-          <a href="">
+          <router-link :to="{ path: `/commodity/listGoods?name=${item.title}`}">
             <img v-lazy="item.imgUrl" :alt="item.title">
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>

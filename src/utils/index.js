@@ -23,3 +23,16 @@ export const isJSON = v => {
     return false;
   }
 };
+// 优惠卷面额解析
+export const CouponNum = v => {
+  const index = v.indexOf('减');
+  const result = parseInt(v.substr(index + 1,v.length));
+  return result;
+};
+
+// // 计算用劵后的价格
+// export const CouponNum = (price, ) => {
+//   const index = v.indexOf('减');
+//   const result = v.substr(index + 1,v.length);
+//   return result;
+// };

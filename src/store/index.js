@@ -16,6 +16,9 @@ export default new Vuex.Store({
     typeCommodity: {}, // 商品类型列表存放
     SingleCommodity:{}, // 单个商品存放
     vaguefind:{},
+    taobaoCommodityList: {},
+    taobaoCommodityDetails: {},
+    taobaoPwdCreate: {},
   },
   // mutations,
   mutations: {
@@ -28,6 +31,15 @@ export default new Vuex.Store({
     setvaguefindCommodity(state, data) {
       state.vaguefind = data;
     },
+    SetTaobaoCommodityFind(state, data) {
+      state.taobaoCommodityList = data;
+    },
+    SetTaobaoCommodityDetails(state, data) {
+      state.taobaoCommodityDetails = data;
+    },
+    SetTaobaoPwdCreate(state, data) {
+      state.taobaoPwdCreate = data;
+    }
   },
   // actions,
   actions: {
@@ -58,7 +70,33 @@ export default new Vuex.Store({
       }
       commit('setvaguefindCommodity', result.data);
     },
-
+    async GetTaobaoCommodityFind({ commit }, data){
+      const result = await http.get('/api/taobao/CommodityFind', {
+        params: data,
+      });
+      if (!result) {
+        return;
+      }
+      commit('SetTaobaoCommodityFind', result.data);
+    },
+    async GetTaobaoCommodityDetails({ commit} ,data) {
+      const result = await http.get('/api/taobao/CommodityDetails', {
+        params: data,
+      });
+      if (!result) {
+        return;
+      }
+      commit('SetTaobaoCommodityDetails', result.data);
+    },
+    async GetTaobaoPwdCreate({ commit} ,data) {
+      const result = await http.get('/api/taobao/pwdCreate', {
+        params: data,
+      });
+      if (!result) {
+        return;
+      }
+      commit('SetTaobaoPwdCreate', result.data);
+    },
   },
   // plugins,
   plugins: [],

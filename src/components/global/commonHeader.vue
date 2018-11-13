@@ -1,5 +1,5 @@
 <template>
-  <div class="main-header">
+  <div class="main-header fixed-top">
     <mt-header :title="$route.meta.title">
       <mt-button icon="back" @click="handleClose" slot="left"></mt-button>
       <mt-button slot="right"><slot></slot></mt-button>

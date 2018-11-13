@@ -3,3 +3,52 @@
   height: .95rem;
   font-size: .32rem;
 }
+.fixed-top{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+#fatherbox{
+  &::before{
+    content: '';
+    display: block;
+    height: .95rem;
+  }
+}
+.to-end{
+  height: .95rem;
+  line-height: .95rem;
+  text-align: center;
+  color: #ccc;
+  div{
+    position: relative;
+    &:before{
+      position: absolute;
+      top: 50%;
+      left: 20%;
+      width:.9rem;
+      height: 1px;
+      background: #ccc;
+      content: '';
+    }
+    &:after{
+      position: absolute;
+      top: 50%;
+      right: 20%;
+      width: .9rem;
+      height: 1px;
+      background: #ccc;
+      content: '';
+    }
+  }
+}
+.details-banner{
+  height: 7.5rem;
+  .swiper-slide{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

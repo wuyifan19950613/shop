@@ -1,11 +1,14 @@
 <template>
-  <div class="details">
-    <loading v-if="!SingleCommodity.data && !vaguefind.data"></loading>
+  <div class="details" v-if="taobaoCommodityDetails.code ">
+    <loading v-if="taobaoCommodityDetails.code != 200"></loading>
     <div class="main-content" v-else>
       <!--  商品主页banner start-->
       <div class="details-banner">
         <swiper :options="detailsSwiper" class="details-banner">
-          <swiper-slide v-for="(item, index) in SingleCommodity.data.showPic" :key="index">
+          <swiper-slide>
+            <img v-lazy="CommodityDetails.pict_url" alt="" class="">
+          </swiper-slide>
+          <swiper-slide v-for="(item, index) in CommodityDetails.small_images.string" :key="index">
             <img v-lazy="item" alt="" class="">
           </swiper-slide>
           <div class="swiper-pagination details-banner-pagination" slot="pagination"></div>
@@ -18,12 +21,12 @@
       <div class="commodity-content">
         <h1>
           <!-- <i class="source-icon"></i> -->
-          <span class="title">{{SingleCommodity.data.title}}</span>
+          <span class="title">{{CommodityDetails.title}}</span>
         </h1>
         <div class="sale-price">
           <div class="ib">
             <span class="icon-fu">￥</span>
-            <span class="money">{{SingleCommodity.data.voucher}}</span>
+            <span class="money">{{(CommodityDetails.zk_final_price - couponInfo).toFixed(2)}}</span>
           </div>
           <span class="title">劵后价</span>
         </div>
@@ -32,20 +35,20 @@
             <span class="title">现价 :</span>
             <div class="ib">
               <span class="icon-fu">￥</span>
-              <span class="money">{{SingleCommodity.data.PrePrice}}</span>
+              <span class="money">{{CommodityDetails.zk_final_price}}</span>
             </div>
           </div>
-          <div class="sold">已售{{SingleCommodity.data.Sales}}件</div>
+          <div class="sold">已售{{CommodityDetails.volume}}件</div>
         </div>
       </div>
       <!--  商品描述/价格 end-->
       <!--  一键复制口令 start-->
       <div class="copy-password md10">
         <div class="">
-          <div class="title" v-clipboard:copy="SingleCommodity.data.token" v-clipboard:success="onCopy" v-clipboard:error="onError"><i class="copy-icon"></i><span>一键点击复制淘口令</span></div>
+          <div class="title" v-clipboard:copy="taobaoPwdCreate.msg.data.model" v-clipboard:success="onCopy" v-clipboard:error="onError"><i class="copy-icon"></i><span>一键点击复制淘口令</span></div>
           <div class="password">
             <p class="password-text">
-              {{SingleCommodity.data.token}}
+              {{taobaoPwdCreate.msg.data.model}}
             </p>
             <p class="password-reamrk">复制这条信息，打开【手机淘宝】即可领劵购买</p>
           </div>
@@ -53,7 +56,7 @@
       </div>
       <!--  一键复制口令 end-->
       <!--  猜你喜欢start-->
-      <div class="guess-lick" v-if="vaguefind">
+      <!-- <div class="guess-lick" v-if="vaguefind">
         <div class="base-title">猜你喜欢</div>
         <ul class="like-commdity">
           <li class="" v-for="(t, i) in vaguefind.data" :key="i">
@@ -71,15 +74,15 @@
             <div class="coupon-info"><i class="coupon-icon"></i><span>{{t.couponMoney}}</span></div>
           </li>
         </ul>
-      </div>
+      </div> -->
       <!--  猜你喜欢end-->
-      <!--  底部浮窗 start-->
+       <!-- 底部浮窗 start-->
       <div class="fixed-bottom flex fe-center">
         <div class="fe"></div>
-        <div class="w-voucher flex fe-center" v-clipboard:copy="SingleCommodity.data.token" v-clipboard:success="onCopy" v-clipboard:error="onError">复制口令</div>
-        <a :href="SingleCommodity.data.singleLink" class="password flex fe-center"> 领劵购买</a>
+        <div class="w-voucher flex fe-center" v-clipboard:copy="taobaoPwdCreate.msg.data.model" v-clipboard:success="onCopy" v-clipboard:error="onError">复制口令</div>
+        <a :href="this.url" class="password flex fe-center"> 领劵购买</a>
       </div>
-      <!--  底部浮窗 end-->
+      <!--  底部浮窗 end -->
     </div>
   </div>
 </template>
@@ -90,6 +93,7 @@ export default {
   name: "",
   data() {
     return{
+      couponInfo:this.$route.query.couponInfo,
       couponData: {
         code: '1231231231231'
       },
@@ -98,17 +102,25 @@ export default {
           el: '.details-banner-pagination',
         },
       },
+      CommodityDetails: {},
+      url: this.$route.query.url,
     }
   },
   mounted() {
-    //do something after mounting vue instance
-    this.findCommodityId({id: this.$route.query.id});
-    this.vaguefindCommodity({Label:this.$route.query.Label, id: this.$route.query.id});
+    this.GetTaobaoCommodityDetails({num_iid: this.$route.query.num_iid}).then(() =>{
+      this.CommodityDetails = this.taobaoCommodityDetails.msg;
+      const infoData = {
+        title: this.taobaoCommodityDetails.msg.title,
+        url: this.url,
+        logo: this.taobaoCommodityDetails.msg.pict_url,
+      }
+      this.GetTaobaoPwdCreate(infoData);
+    })
   },
   methods: {
     ...mapActions([
-      'findCommodityId',
-      'vaguefindCommodity',
+      'GetTaobaoCommodityDetails',
+      'GetTaobaoPwdCreate',
     ]),
     onCopy() {
       this.$toast({
@@ -132,8 +144,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'SingleCommodity',
-      'vaguefind',
+      'taobaoCommodityDetails',
+      'taobaoPwdCreate',
     ])
   },
 }
