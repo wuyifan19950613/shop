@@ -661,11 +661,10 @@
         font-size: .24rem;
         padding-top: .1rem;
         font-weight: normal;
-        overflow: hidden;
-        text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
       }
       .coupon{
         margin-top: .16rem;
