@@ -40,7 +40,7 @@
 
     <!--  商品列表start-->
     <div class="recommend md10">
-      <div class="base-title">好的都在这里</div>
+      <div class="base-title">好的都在这里 （暂未开放）</div>
       <div class="default-height" v-if="navSwiperFiexd"></div>
       <swiper :options="shop_list" :class="`nav-swiper ${navSwiperFiexd ? 'active' : ''}`" ref="navSwiper">
         <swiper-slide class="nav-slide" v-for="(item, index) in shop_nav_list" :key="index">
@@ -48,7 +48,7 @@
         </swiper-slide>
       </swiper>
       <ul class="recommend-list">
-        <li v-if="typeCommodity" v-for="(t, i) in allList[nav_active]" :key="i">
+        <!-- <li v-if="typeCommodity" v-for="(t, i) in allList[nav_active]" :key="i">
           <router-link :to="{ path: '/commodity/details', query: {id: t._id, Label: t.Label}}">
             <div class="img-url">
                 <img class="" :src="t.showPic[0]" alt="">
@@ -62,7 +62,7 @@
                 <span class="market-price">¥{{t.PrePrice}}</span>
               </div>
               <div class="progress">
-                <!-- <span class="count-coupon">剩余100000</span> -->
+                <span class="count-coupon">剩余100000</span>
                 <div class="used-coupon" style="width:100%;">
                   <span class="j">劵</span>
                   <span>{{t.couponMoney}}元</span>
@@ -70,8 +70,7 @@
               </div>
             </div>
           </router-link>
-
-        </li>
+        </li> -->
       </ul>
     </div>
     <!--  商品列表end-->
