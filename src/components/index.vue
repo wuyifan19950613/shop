@@ -177,13 +177,13 @@ export default {
              swiper.setTranslate(-nowTlanslate);
             }
             this.nav_active = clickIndex;
-            this.findCommodity({type: clickIndex}).then((res)=> {
-              let shoplist = [];
-              for(let i = 0; i < this.typeCommodity.data.length; i += 1) {
-                shoplist.push(this.typeCommodity.data[i]);
-                this.$set(this.allList, [clickIndex], shoplist);
-              }
-            });
+            // this.findCommodity({type: clickIndex}).then((res)=> {
+            //   let shoplist = [];
+            //   for(let i = 0; i < this.typeCommodity.data.length; i += 1) {
+            //     shoplist.push(this.typeCommodity.data[i]);
+            //     this.$set(this.allList, [clickIndex], shoplist);
+            //   }
+            // });
             // document.documentElement.scrollTop = offsetTop - 50;
             // this.navSwiperFiexd = true;
            },
