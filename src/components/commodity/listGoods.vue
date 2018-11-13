@@ -5,7 +5,7 @@
         <li class="" v-for="(t, i) in commodityList" :key="i">
           <router-link :to="{ path: '/commodity/details', query: { num_iid: t.num_iid, couponInfo: CouponNum(t.coupon_info), url: t.coupon_click_url}}">
             <div>
-              <img :src="t.pict_url" alt="">
+              <img v-lazy="t.pict_url" alt="">
             </div>
             <div class="commdity-info">
               <h1 class="title">{{t.title}}</h1>
