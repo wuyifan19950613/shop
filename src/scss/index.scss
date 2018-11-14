@@ -384,14 +384,14 @@
   }
 }
 .return-page{
-  position: absolute;
+  position: fixed;
   top: .2rem;
   left: .2rem;
-  width: .6rem;
-  height: .6rem;
+  width: .8rem;
+  height: .8rem;
   background: rgba(0,0,0,.8);
   border-radius: 50%;
-  z-index: 3;
+  z-index: 99;
   display: flex;
   justify-content: center;
   align-items: center;
