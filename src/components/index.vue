@@ -50,13 +50,9 @@
         </swiper>
         <swiper :options="commoditySwiper" ref="commoditySwiper">
           <swiper-slide  v-if="typeCommodity" v-for="(time, index) in shop_nav_list" :key="index" class="commoditySwiper-slide">
-            <ul class="recommend-list"
-            v-infinite-scroll="loadMoreCommod"
-            infinite-scroll-disabled="loadingScroll"
-            infinite-scroll-distance="0"
-            infinite-scroll-immediate-check="false">
+            <ul class="recommend-list">
               <li v-for="(t, i ) in allList[index]" :key="i">
-                <router-link :to="{ path: '/commodity/details'}">
+                <router-link :to="{ path: '/commodity/details', query:{num_iid: t.item_id, couponInfo: t.coupon_amount, url: `https:${t.coupon_click_url}`}}">
                   <div class="img-url">
                       <img class="" :src="t.pict_url" alt="">
                   </div>
@@ -83,10 +79,7 @@
               </div>
             </ul>
           </swiper-slide>
-
         </swiper>
-
-
       </div>
       <!--  商品列表end-->
     </div>
@@ -170,7 +163,48 @@ export default {
         },
       ],
       commoditySwiper: {
-
+        notNextTick: true,
+        loop: false,
+        on: {
+          slideChangeTransitionStart: ()=> {
+            this.loadingScroll = false;
+            const commoditySwiper = this.$refs.commoditySwiper.swiper;
+            const index = commoditySwiper.activeIndex;
+            this.nav_active = index;
+            this.notScroll = false;
+            let nowTlanslate;
+           const swiper = this.$refs.navSwiper.swiper;
+           const swiperWidth = swiper.$el[0].clientWidth;
+           const width = swiperWidth / 2;
+           const maxTranslate = swiper.maxTranslate();
+           const maxWidth = -maxTranslate + width;
+           const slide = swiper.slides[index];
+           const slideLeft = slide.offsetLeft;
+           const slideWidth = slide.clientWidth;
+           const halfSlideWidth = slideWidth / 2;
+           const slideCenter = slideLeft + halfSlideWidth;
+           const offsetTop = swiper.$el[0].offsetTop;
+           swiper.setTransition(500);
+           if (slideCenter < swiperWidth / 2) {
+            swiper.setTranslate(0);
+           } else if (slideCenter > maxWidth) {
+            swiper.setTranslate(maxTranslate);
+           } else {
+            nowTlanslate = slideCenter - width;
+            swiper.setTranslate(-nowTlanslate);
+           }
+           commoditySwiper.slideTo(this.nav_active, 0, false);
+           this.GetOptimusMaterial({
+             pageNum: this.shop_nav_list[this.nav_active].pageNum,
+             pageSize: this.pageSize,
+             material_id: this.shop_nav_list[this.nav_active].material_id,
+           }).then(()=> {
+             $('html, body').animate({scrollTop: (this.init.offsetTop + 60)});
+             this.$set(this.allList, [this.nav_active], this.OptimusMaterial.msg.result_list.map_data);
+             this.loadingScroll = true;
+           });
+          }
+        },
       },
       shop_list: {
         slidesPerView : 'auto',
@@ -178,7 +212,9 @@ export default {
         freeMode: true,
         on:{
            tap:() => {
-             let nowTlanslate;
+            this.notScroll = false;
+            this.loadingScroll = false;
+            let nowTlanslate;
             const swiper = this.$refs.navSwiper.swiper;
             const swiperWidth = swiper.$el[0].clientWidth;
             const width = swiperWidth / 2;
@@ -202,7 +238,7 @@ export default {
             }
             this.nav_active = clickIndex;
             const commoditySwiper = this.$refs.commoditySwiper.swiper;
-            commoditySwiper.slideTo(this.nav_active, 100, false);
+            commoditySwiper.slideTo(this.nav_active, 20, false);
             this.GetOptimusMaterial({
               pageNum: this.shop_nav_list[this.nav_active].pageNum,
               pageSize: this.pageSize,
@@ -210,6 +246,7 @@ export default {
             }).then(()=> {
               $('html, body').animate({scrollTop: (this.init.offsetTop + 60)});
               this.$set(this.allList, [this.nav_active], this.OptimusMaterial.msg.result_list.map_data);
+              this.loadingScroll = true;
             });
            },
          },
@@ -294,6 +331,7 @@ export default {
     }).then(()=> {
       this.notScroll = true;
       this.$set(this.allList, [this.nav_active], this.OptimusMaterial.msg.result_list.map_data);
+      this.loadingScroll = true;
     })
   },
   methods: {
@@ -301,39 +339,34 @@ export default {
       'GetOptimusMaterial',
     ]),
     loadMoreCommod() {
-      if(!this.notScroll) {
-        return false;
-      }
-      this.loadingScroll = true;
-      setTimeout(() => {
-        let oldPageNum =  this.shop_nav_list[this.nav_active].pageNum;
-        oldPageNum = oldPageNum + 1;
-        this.shop_nav_list[this.nav_active].pageNum = oldPageNum;
-        console.log(this.shop_nav_list[this.nav_active].pageNum);
-        this.loadingScroll = false;
-      },500)
 
-      // this.GetOptimusMaterial({
-      //   pageNum: this.shop_nav_list[this.nav_active].pageNum,
-      //   pageSize: this.pageSize,
-      //   material_id: this.shop_nav_list[this.nav_active].material_id,
-      // }).then(()=> {
-      //   const map_data = this.OptimusMaterial.msg.result_list.map_data;
-      //   for (let i = 0; i< map_data.length; i += 1) {
-      //     this.allList[this.nav_active].push(map_data[i]);
-      //     // this.$set(this.allList, [this.nav_active], map_data[i]);
-      //   }
-      //   // this.loadingScroll = false;
-      // })
     },
     // 监听滚动
     addEvent(obj, callback) {
       window.addEventListener(obj, callback);
     },
-
     handleScroll() {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       this.domeScrollTop = scrollTop;
+       if($(document).scrollTop() + 50 >=$(document).height()-$(window).height() && this.loadingScroll){
+         this.loadingScroll = false;
+         let oldPageNum =  this.shop_nav_list[this.nav_active].pageNum;
+         oldPageNum = oldPageNum + 1;
+         this.shop_nav_list[this.nav_active].pageNum = oldPageNum;
+         this.GetOptimusMaterial({
+           pageNum: this.shop_nav_list[this.nav_active].pageNum,
+           pageSize: this.pageSize,
+           material_id: this.shop_nav_list[this.nav_active].material_id,
+         }).then(()=> {
+           const map_data = this.OptimusMaterial.msg.result_list.map_data;
+           if (map_data) {
+             for (let i = 0; i< map_data.length; i += 1) {
+               this.allList[this.nav_active].push(map_data[i]);
+             }
+           }
+           this.loadingScroll = true;
+         })
+       }
       const opacity = scrollTop/150;
       if(opacity<=1){
         this.headerOpicty = opacity;

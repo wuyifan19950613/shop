@@ -8,7 +8,7 @@
           <swiper-slide>
             <img v-lazy="CommodityDetails.pict_url" alt="" class="">
           </swiper-slide>
-          <swiper-slide v-for="(item, index) in CommodityDetails.small_images.string" :key="index">
+          <swiper-slide v-for="(item, index) in small_images" :key="index">
             <img v-lazy="item" alt="" class="">
           </swiper-slide>
           <div class="swiper-pagination details-banner-pagination" slot="pagination"></div>
@@ -45,10 +45,10 @@
       <!--  一键复制口令 start-->
       <div class="copy-password md10">
         <div class="">
-          <div class="title" v-clipboard:copy="taobaoPwdCreate.msg.data.model" v-clipboard:success="onCopy" v-clipboard:error="onError"><i class="copy-icon"></i><span>一键点击复制淘口令</span></div>
+          <div class="title" v-clipboard:copy="couponCode" v-clipboard:success="onCopy" v-clipboard:error="onError"><i class="copy-icon"></i><span>一键点击复制淘口令</span></div>
           <div class="password">
             <p class="password-text">
-              {{taobaoPwdCreate.msg.data.model}}
+              {{couponCode}}
             </p>
             <p class="password-reamrk">复制这条信息，打开【手机淘宝】即可领劵购买</p>
           </div>
@@ -79,7 +79,7 @@
        <!-- 底部浮窗 start-->
       <div class="fixed-bottom flex fe-center">
         <div class="fe"></div>
-        <div class="w-voucher flex fe-center" v-clipboard:copy="taobaoPwdCreate.msg.data.model" v-clipboard:success="onCopy" v-clipboard:error="onError">复制口令</div>
+        <div class="w-voucher flex fe-center" v-clipboard:copy="couponCode" v-clipboard:success="onCopy" v-clipboard:error="onError">复制口令</div>
         <a :href="this.url" class="password flex fe-center"> 领劵购买</a>
       </div>
       <!--  底部浮窗 end -->
@@ -97,6 +97,7 @@ export default {
       couponData: {
         code: '1231231231231'
       },
+      small_images: [],
       detailsSwiper: {
         pagination: {
           el: '.details-banner-pagination',
@@ -104,17 +105,21 @@ export default {
       },
       CommodityDetails: {},
       url: this.$route.query.url,
+      couponCode: '',
     }
   },
   mounted() {
     this.GetTaobaoCommodityDetails({num_iid: this.$route.query.num_iid}).then(() =>{
       this.CommodityDetails = this.taobaoCommodityDetails.msg;
+      this.small_images = this.CommodityDetails.small_images.string
       const infoData = {
         title: this.taobaoCommodityDetails.msg.title,
-        url: this.url,
+        url: `${this.url}`,
         logo: this.taobaoCommodityDetails.msg.pict_url,
       }
-      this.GetTaobaoPwdCreate(infoData);
+      this.GetTaobaoPwdCreate(infoData).then(() => {
+        this.couponCode = this.taobaoPwdCreate.msg.data.model;
+      });
     })
   },
   methods: {
