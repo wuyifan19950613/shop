@@ -391,6 +391,9 @@ export default {
       'OptimusMaterial',
     ]),
   },
+  destroyed(){
+      window.removeEventListener('scroll', this.handleScroll);//监听页面滚动事件
+  },
 
 }
 </script>
