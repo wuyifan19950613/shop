@@ -19,6 +19,7 @@ export default new Vuex.Store({
     taobaoCommodityList: {},
     taobaoCommodityDetails: {},
     taobaoPwdCreate: {},
+    OptimusMaterial: {},
   },
   // mutations,
   mutations: {
@@ -39,7 +40,10 @@ export default new Vuex.Store({
     },
     SetTaobaoPwdCreate(state, data) {
       state.taobaoPwdCreate = data;
-    }
+    },
+    SetOptimusMaterial(state, data) {
+      state.OptimusMaterial = data;
+    },
   },
   // actions,
   actions: {
@@ -97,6 +101,15 @@ export default new Vuex.Store({
       }
       commit('SetTaobaoPwdCreate', result.data);
     },
+    async GetOptimusMaterial({ commit }, data){
+      const result = await http.get('/api/taobao/optimusMaterial', {
+        params: data,
+      });
+      if (!result) {
+        return;
+      }
+      commit('SetOptimusMaterial', result.data);
+    }
   },
   // plugins,
   plugins: [],

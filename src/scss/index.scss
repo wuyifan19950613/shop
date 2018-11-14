@@ -9,14 +9,7 @@
       max-width: 750px;
       margin: auto;
       height:.95rem;
-      background: rgba(0,0,0,.5);
       transition: background .2s;
-      &.active{
-        background: rgba(0,0,0,.8);
-      }
-      &.active1{
-        background: rgba(0,0,0,1);
-      }
     }
     input[name="search"]{
       height: .68rem;
@@ -34,7 +27,7 @@
 .index-banner{
   padding-bottom: .6rem;
   background: #fff;
-  height: 3.8rem;
+  height: 3.5rem;
 }
 .advertisement{
   background: #fff;
@@ -219,7 +212,6 @@
             font-size: .24rem;
             padding-left: .1rem;
             line-height: .3rem;
-            text-align: center;
             .j{
               position: relative;
               &:after{
@@ -253,6 +245,7 @@
     left: 0;
     width: 100%;
     background: #fff;
+    z-index: 99;
     box-shadow: 1px 1px 13px #ccc;
   }
   .nav-slide{
@@ -718,4 +711,12 @@
   right: .2rem;
   transform: translateY(-50%);
   font-weight: normal;
+}
+.commoditySwiper-slide{
+  &.swiper-slide{
+    height: .1rem;
+  }
+  &.swiper-slide-active{
+    height: auto;
+  }
 }
