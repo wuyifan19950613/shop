@@ -68,7 +68,7 @@
                     </div>
                     <div class="progress">
                       <span class="count-coupon">剩余{{t.coupon_total_count}}</span>
-                      <div class="used-coupon" style="width:21%;">
+                      <div class="used-coupon" style="width:22%;">
                         <span class="j">劵</span>
                         <span>{{t.coupon_amount}}元</span>
                       </div>
@@ -256,57 +256,72 @@ export default {
       shop_nav_list: [
         {
           title: '综合',
-          material_id: '3756',
+          material_id: '3786',
+          pageNum: 1,
+        },
+        {
+          title:'有好货',
+          material_id: '4092',
+          pageNum: 1,
+        },
+        {
+          title:'潮流范',
+          material_id: '4093',
+          pageNum: 1,
+        },
+        {
+          title:'特惠',
+          material_id: '4094',
           pageNum: 1,
         },
         {
           title: '女装',
-          material_id: '3767',
+          material_id: '3788',
           pageNum: 1,
         },
         {
           title: '家居家装',
-          material_id: '3758',
+          material_id: '3792',
           pageNum: 1,
         },
         {
           title: '数码家电',
-          material_id: '3759',
+          material_id: '3793',
           pageNum: 1,
         },
         {
           title: '母婴',
-          material_id: '3760',
+          material_id: '3789',
           pageNum: 1,
         },
         {
           title: '食品',
-          material_id: '3761',
+          material_id: '3791',
           pageNum: 1,
         },
         {
           title: '鞋包配饰',
-          material_id: '3762',
+          material_id: '3796',
           pageNum: 1,
         },
         {
           title: '美妆个护',
-          material_id: '3763',
+          material_id: '3794',
           pageNum: 1,
         },
         {
           title: '男装',
-          material_id: '3764',
+          material_id: '3790',
           pageNum: 1,
         },
         {
           title: '内衣',
-          material_id: '3765',
+          material_id: '3787',
           pageNum: 1,
         },
         {
           title: '运动户外',
-          material_id: '3766',
+          material_id: '3795',
           pageNum: 1,
         },
       ],

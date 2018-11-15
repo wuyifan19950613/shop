@@ -21,6 +21,7 @@ export default [
     component: search,
     meta: {
       title: '搜索宝贝',
+      keepAlive: true,
     },
   },
 ]

@@ -30,26 +30,26 @@
     </div> -->
     <!--  为你推荐start-->
     <div class="recommend md10">
-      <div class="base-title">为你推荐</div>
+      <div class="base-title">有好货</div>
       <ul class="recommend-list">
-        <li v-for="(t, i) in typeCommodity.data" :key="i">
-          <router-link :to="{ path: '/commodity/details', query: { id: t._id, Label: t.Label}}">
+        <li v-for="(t, i) in typeCommodity" :key="i">
+          <router-link :to="{ path: '/commodity/details', query: { num_iid: t.item_id, couponInfo: t.coupon_amount, url: `https:${t.coupon_click_url}`}}">
             <div class="img-url">
-              <img class="" :src="t.showPic[0]" alt="">
+              <img class="" :src="t.pict_url" alt="">
             </div>
             <div class="commodity">
               <h1 class="commodity-title">
                 {{t.title}}
               </h1>
               <div class="price">
-                <span class="sale-price">¥{{t.voucher}}</span>
-                <span class="market-price">¥{{t.PrePrice}}</span>
+                <span class="sale-price">¥{{(t.zk_final_price - t.coupon_amount).toFixed(2)}}</span>
+                <span class="market-price">¥{{t.zk_final_price}}</span>
               </div>
               <div class="progress">
-                <!-- <span class="count-coupon">剩余100000</span> -->
-                <div class="used-coupon" style="width:100%;">
+                <span class="count-coupon">剩余{{t.coupon_total_count}}</span>
+                <div class="used-coupon" style="width:22%;">
                   <span class="j">劵</span>
-                  <span>{{t.couponMoney}}元</span>
+                  <span>{{t.coupon_amount}}元</span>
                 </div>
               </div>
             </div>
@@ -69,6 +69,8 @@ export default {
     return{
       search_val: '',
       history: '',
+      typeCommodity: '',
+
     }
   },
   directives: {
@@ -82,13 +84,17 @@ export default {
     //do something after mounting vue instance
     const history = this.$getLS('HistoricalRecords').split('|');
     this.history = history;
-    this.findCommodity().then((res)=> {
-      console.log(this.typeCommodity);
+    this.GetOptimusMaterial({
+      pageNum: 1,
+      pageSize: 10,
+      material_id: '4092',
+    }).then(()=> {
+      this.typeCommodity = this.OptimusMaterial.msg.result_list.map_data;
     });
   },
   methods: {
     ...mapActions([
-      'findCommodity',
+      'GetOptimusMaterial',
     ]),
     search_btn() {
       if (this.search_val === '') {
@@ -134,7 +140,7 @@ export default {
   },
   computed: {
     ...mapState([
-      'typeCommodity',
+      'OptimusMaterial',
     ]),
   },
 }
