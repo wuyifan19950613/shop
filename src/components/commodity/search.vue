@@ -2,7 +2,7 @@
   <div id="fatherbox">
     <div class="serch-box md10">
       <i class="serch-icon"></i>
-      <input name="search" placeholder="Red Charcoal × Staple重磅来袭！" v-focus type="text" v-model="search_val">
+      <input name="search" placeholder="请输入关键词和宝贝名称" v-focus type="text" v-model="search_val">
       <div class="search-btn" @click="search_btn">查询</div>
     </div>
     <div class="hot-search md10" v-if="history != ''">

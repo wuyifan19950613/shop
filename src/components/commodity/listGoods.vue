@@ -3,7 +3,7 @@
     <loading v-if="loading"></loading>
     <ul class="like-commdity" v-else   v-infinite-scroll="loadMore" infinite-scroll-disabled="loadingScroll" infinite-scroll-distance="10" infinite-scroll-immediate-check="false">
         <li class="" v-for="(t, i) in commodityList" :key="i">
-          <router-link :to="{ path: '/commodity/details', query: { num_iid: t.num_iid, couponInfo: CouponNum(t.coupon_info), url: t.coupon_click_url}}">
+          <router-link :to="{ path: '/commodity/details', query: { num_iid: t.num_iid, couponInfo: CouponNum(t.coupon_info), url:`https:${t.coupon_share_url}`}}">
             <div>
               <img v-lazy="t.pict_url" alt="">
             </div>
@@ -35,10 +35,9 @@ export default {
       loadingScroll: false,
       commodityList: [],
       pageNum: 1,
-      pageSize: 100,
+      pageSize: 30,
       total_results: 0,
       toEnd: false,
-
     }
   },
   mounted() {
@@ -47,47 +46,49 @@ export default {
       pageNum: this.pageNum,
       pageSize: this.pageSize,
     }
-    this.GetTaobaoCommodityFind(data).then(()=> {
-      this.loading = false;
-      this.commodityList = this.taobaoCommodityList.msg.results.tbk_coupon;
-      this.total_results = this.taobaoCommodityList.msg.total_results;
-    });
+      this.GetTaobaoMaterialOptional({
+        searchName: this.$route.query.name,
+        pageNum: this.pageNum,
+        pageSize: this.pageSize,
+      }).then(() => {
+        this.loading = false;
+        this.total_results = this.MaterialOptional.msg.total_results;
+        this.commodityList = this.MaterialOptional.msg.result_list.map_data;
+      })
   },
   methods: {
     ...mapActions([
       'vaguefindCommodity',
       'GetTaobaoCommodityFind',
+      'GetTaobaoMaterialOptional',
     ]),
     loadMore(){
       this.loading = false;
-      setTimeout(() => {
-        if (this.commodityList.length >= this.total_results) {
-          this.toEnd = true;
-          return false;
+      this.loadingScroll = true;
+      if (this.commodityList.length >= this.total_results) {
+        this.toEnd = true;
+        return false;
+      }
+      this.pageNum = this.pageNum + 1;
+      const data = {
+        searchName: this.$route.query.name,
+        pageNum: this.pageNum,
+        pageSize: this.pageSize,
+      }
+      this.GetTaobaoMaterialOptional(data).then(() => {
+        const listArray = this.MaterialOptional.msg.result_list.map_data;
+        for (let t in listArray) {
+          this.commodityList.push(listArray[t]);
         }
-        this.pageNum = this.pageNum + 1;
-        const data = {
-          commodityName: this.$route.query.name,
-          pageNum: this.pageNum,
-          pageSize: this.pageSize,
-        }
-        this.GetTaobaoCommodityFind(data).then(()=> {
-          this.$Indicator.open('加载中...');
-          this.loading = false;
-          var comArray =  this.taobaoCommodityList.msg.results.tbk_coupon;
-          for (let i = 0; i < comArray.length; i += 1) {
-            this.commodityList.push(comArray[i]);
-          }
-          this.loadingScroll = false;
-          this.$Indicator.close();
-        });
-      }, 500);
+        this.loadingScroll = false;
+      })
     }
   },
   computed: {
     ...mapState([
       'vaguefind',
       'taobaoCommodityList',
+      'MaterialOptional',
     ])
   },
 }

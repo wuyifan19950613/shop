@@ -12,6 +12,7 @@ export default [
     component: listGoods,
     meta: {
       title: '宝贝列表',
+      keepAlive: true,
     },
   },
   {

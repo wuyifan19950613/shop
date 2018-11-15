@@ -29,6 +29,17 @@ export const CouponNum = v => {
   const result = parseInt(v.substr(index + 1,v.length));
   return result;
 };
+export const get_client_ip = (req)=> {
+    var ip = req.headers['x-forwarded-for'] ||
+        req.ip ||
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress ||
+        req.connection.socket.remoteAddress || '';
+    if(ip.split(',').length>0){
+        ip = ip.split(',')[0]
+    }
+    return ip;
+};
 
 // // 计算用劵后的价格
 // export const CouponNum = (price, ) => {

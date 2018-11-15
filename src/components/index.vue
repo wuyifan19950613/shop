@@ -22,7 +22,9 @@
 
       <!--  首页广告位start-->
       <div class="advertisement md10">
-        <img src="../assets/img/icon/ggw01.png" alt="">
+        <a href="https://mo.m.taobao.com/optimus/jhspt2c?pid=mm_122552127_208550462_57801250099">
+          <img src="../assets/img/pintuan.png" alt="">
+        </a>
       </div>
       <!--  首页广告位end-->
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="details" v-if="taobaoCommodityDetails.code ">
-    <loading v-if="taobaoCommodityDetails.code != 200"></loading>
+  <div class="details">
+    <loading v-if="loading"></loading>
     <div class="main-content" v-else>
       <!--  商品主页banner start-->
       <div class="details-banner">
@@ -89,11 +89,13 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 
+
 export default {
   name: "",
   data() {
     return{
       couponInfo:this.$route.query.couponInfo,
+      loading: true,
       couponData: {
         code: '1231231231231'
       },
@@ -110,6 +112,7 @@ export default {
   },
   mounted() {
     this.GetTaobaoCommodityDetails({num_iid: this.$route.query.num_iid}).then(() =>{
+
       this.CommodityDetails = this.taobaoCommodityDetails.msg;
       this.small_images = this.CommodityDetails.small_images.string
       const infoData = {
@@ -119,8 +122,10 @@ export default {
       }
       this.GetTaobaoPwdCreate(infoData).then(() => {
         this.couponCode = this.taobaoPwdCreate.msg.data.model;
+        this.loading = false;
       });
-    })
+    });
+
   },
   methods: {
     ...mapActions([

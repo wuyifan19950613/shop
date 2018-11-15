@@ -20,6 +20,8 @@ export default new Vuex.Store({
     taobaoCommodityDetails: {},
     taobaoPwdCreate: {},
     OptimusMaterial: {},
+    GuessLike: {},
+    MaterialOptional: {},
   },
   // mutations,
   mutations: {
@@ -44,9 +46,22 @@ export default new Vuex.Store({
     SetOptimusMaterial(state, data) {
       state.OptimusMaterial = data;
     },
+    SetTaobaoMaterialOptional(state, data) {
+      state.MaterialOptional = data;
+    },
   },
   // actions,
   actions: {
+    async GetTaobaoMaterialOptional({ commit }, data) {
+      const result = await http.get('/api/taobao/materialOptional', {
+        params: data,
+      });
+      if (!result) {
+        return;
+      }
+      console.log(result.data)
+      commit('SetTaobaoMaterialOptional', result.data);
+    },
     async findCommodity({ commit }, data) {
       const result = await http.get('/api/find/typeCommodity', {
         params: data,

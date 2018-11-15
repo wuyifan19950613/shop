@@ -333,6 +333,11 @@
 .copy-password{
   background: #fff;
   padding: .2rem;
+  &:after{
+    content: '';
+    display: block;
+    height: 2rem;
+  }
   .password{
     text-align: center;
     border: 1px dashed #f95e5b;
@@ -719,4 +724,7 @@
   &.swiper-slide-active{
     height: auto;
   }
+}
+input{
+  -webkit-appearance:none;
 }
