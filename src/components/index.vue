@@ -1,93 +1,109 @@
 <template>
   <div id="" class="max-width">
-    <!--  查询商品input start-->
-    <div class="serch-commodity">
-      <div :class="`serch-content ${backActive}`">
-        <router-link :to="{ path: '/commodity/search'}">
-          <input name="search" type="text" placeholder="请输入搜索文字">
-        </router-link>
+    <div>
+      <!--  查询商品input start-->
+      <div class="serch-commodity">
+        <div :class="`serch-content ${backActive}`" :style="`background:rgba(0,0,0,${headerOpicty})`">
+          <router-link :to="{ path: '/commodity/search'}">
+            <input name="search" type="text" placeholder="请输入搜索文字">
+          </router-link>
+        </div>
       </div>
-    </div>
-    <!--  查询商品input end-->
+      <!--  查询商品input end-->
 
-    <!--  首页banner图start-->
-    <swiper :options="indexBanner" class="index-banner">
-      <swiper-slide v-for="(item, index) in imgUrl" :key="index">
-        <img v-lazy="item" alt="" class="">
-      </swiper-slide>
-      <div class="swiper-pagination index-banner-pagination" slot="pagination"></div>
-    </swiper>
-    <!--  首页banner图end-->
-
-    <!--  首页广告位start-->
-    <div class="advertisement md10">
-      <img src="../assets/img/icon/ggw01.png" alt="">
-    </div>
-    <!--  首页广告位end-->
-
-    <!--  热门商品start-->
-    <div class="hot-commodity md10">
-      <div class="base-title">热门品类</div>
-      <ul class="commodity-list">
-        <li class="" v-for="(item, index) in commodityUrl" :key="index">
-          <router-link :to="{ path: `/commodity/listGoods?name=${item.title}`}">
-            <img v-lazy="item.imgUrl" :alt="item.title">
-          </router-link>
-        </li>
-      </ul>
-    </div>
-    <!--  热门商品end-->
-
-    <!--  商品列表start-->
-    <div class="recommend md10">
-      <div class="base-title">好的都在这里 （暂未开放）</div>
-      <div class="default-height" v-if="navSwiperFiexd"></div>
-      <swiper :options="shop_list" :class="`nav-swiper ${navSwiperFiexd ? 'active' : ''}`" ref="navSwiper">
-        <swiper-slide class="nav-slide" v-for="(item, index) in shop_nav_list" :key="index">
-          <div class="nav-title" :class="{active:index === nav_active}">{{item}}</div>
+      <!--  首页banner图start-->
+      <swiper :options="indexBanner" class="index-banner">
+        <swiper-slide v-for="(item, index) in imgUrl" :key="index">
+          <img v-lazy="item" alt="" class="">
         </swiper-slide>
+        <div class="swiper-pagination index-banner-pagination" slot="pagination"></div>
       </swiper>
-      <ul class="recommend-list">
-        <!-- <li v-if="typeCommodity" v-for="(t, i) in allList[nav_active]" :key="i">
-          <router-link :to="{ path: '/commodity/details', query: {id: t._id, Label: t.Label}}">
-            <div class="img-url">
-                <img class="" :src="t.showPic[0]" alt="">
-            </div>
-            <div class="commodity">
-              <h1 class="commodity-title">
-                {{t.title}}
-              </h1>
-              <div class="price">
-                <span class="sale-price">¥{{t.voucher}}</span>
-                <span class="market-price">¥{{t.PrePrice}}</span>
+      <!--  首页banner图end-->
+
+      <!--  首页广告位start-->
+      <div class="advertisement md10">
+        <a href="https://mo.m.taobao.com/optimus/jhspt2c?pid=mm_122552127_208550462_57801250099">
+          <img src="../assets/img/pintuan.png" alt="">
+        </a>
+      </div>
+      <!--  首页广告位end-->
+
+      <!--  热门商品start-->
+      <div class="hot-commodity md10">
+        <div class="base-title">热门品类</div>
+        <ul class="commodity-list">
+          <li class="" v-for="(item, index) in commodityUrl" :key="index">
+            <router-link :to="{ path: `/commodity/listGoods?name=${item.title}`}">
+              <img v-lazy="item.imgUrl" :alt="item.title">
+            </router-link>
+          </li>
+        </ul>
+      </div>
+      <!--  热门商品end-->
+
+      <!--  商品列表start-->
+      <div class="recommend md10">
+        <div class="base-title">好劵直播实时更新</div>
+        <div class="default-height" v-if="navSwiperFiexd"></div>
+        <swiper :options="shop_list" :class="`nav-swiper ${navSwiperFiexd ? 'active' : ''}`" ref="navSwiper">
+          <swiper-slide class="nav-slide" v-for="(item, index) in shop_nav_list" :key="index">
+            <div class="nav-title" :class="{active:index === nav_active}">{{item.title}}</div>
+          </swiper-slide>
+        </swiper>
+        <swiper :options="commoditySwiper" ref="commoditySwiper">
+          <swiper-slide  v-if="typeCommodity" v-for="(time, index) in shop_nav_list" :key="index" class="commoditySwiper-slide">
+            <ul class="recommend-list">
+              <li v-for="(t, i ) in allList[index]" :key="i">
+                <router-link :to="{ path: '/commodity/details', query:{num_iid: t.item_id, couponInfo: t.coupon_amount, url: `https:${t.coupon_click_url}`}}">
+                  <div class="img-url">
+                      <img class="" :src="t.pict_url" alt="">
+                  </div>
+                  <div class="commodity">
+                    <h1 class="commodity-title">
+                      {{t.title}}
+                    </h1>
+                    <div class="price">
+                      <span class="sale-price">¥{{(t.zk_final_price - t.coupon_amount).toFixed(2)}}</span>
+                      <span class="market-price">¥{{t.zk_final_price}}</span>
+                    </div>
+                    <div class="progress">
+                      <span class="count-coupon">剩余{{t.coupon_total_count}}</span>
+                      <div class="used-coupon" style="width:22%;">
+                        <span class="j">劵</span>
+                        <span>{{t.coupon_amount}}元</span>
+                      </div>
+                    </div>
+                  </div>
+                </router-link>
+              </li>
+              <div v-if="!allList[index]" style="height:517px;display:flex;justify-content: center;align-items: center;">
+                <img src="@/assets/img/icon/loading.gif" alt="">
               </div>
-              <div class="progress">
-                <span class="count-coupon">剩余100000</span>
-                <div class="used-coupon" style="width:100%;">
-                  <span class="j">劵</span>
-                  <span>{{t.couponMoney}}元</span>
-                </div>
-              </div>
-            </div>
-          </router-link>
-        </li> -->
-      </ul>
+            </ul>
+          </swiper-slide>
+        </swiper>
+      </div>
+      <!--  商品列表end-->
     </div>
-    <!--  商品列表end-->
   </div>
 </template>
 <script>
 import { mapActions, mapState } from 'vuex';
-
+import $ from 'jquery';
 export default {
   name: "index",
   data() {
     return{
+      loading: true,
+      loadingScroll: false,
+      notScroll: false,
       backActive: '',
       nav_active: 0,
       domeScrollTop: 0,
       navSwiperFiexd: false,
       allList: [],
+      headerOpicty: '',
+      listLoading: false,
       init: {
         offsetTop: '',
       },
@@ -148,13 +164,59 @@ export default {
           title:'袜子'
         },
       ],
+      commoditySwiper: {
+        notNextTick: true,
+        loop: false,
+        on: {
+          slideChangeTransitionStart: ()=> {
+            this.loadingScroll = false;
+            const commoditySwiper = this.$refs.commoditySwiper.swiper;
+            const index = commoditySwiper.activeIndex;
+            this.nav_active = index;
+            this.notScroll = false;
+            let nowTlanslate;
+           const swiper = this.$refs.navSwiper.swiper;
+           const swiperWidth = swiper.$el[0].clientWidth;
+           const width = swiperWidth / 2;
+           const maxTranslate = swiper.maxTranslate();
+           const maxWidth = -maxTranslate + width;
+           const slide = swiper.slides[index];
+           const slideLeft = slide.offsetLeft;
+           const slideWidth = slide.clientWidth;
+           const halfSlideWidth = slideWidth / 2;
+           const slideCenter = slideLeft + halfSlideWidth;
+           const offsetTop = swiper.$el[0].offsetTop;
+           swiper.setTransition(500);
+           if (slideCenter < swiperWidth / 2) {
+            swiper.setTranslate(0);
+           } else if (slideCenter > maxWidth) {
+            swiper.setTranslate(maxTranslate);
+           } else {
+            nowTlanslate = slideCenter - width;
+            swiper.setTranslate(-nowTlanslate);
+           }
+           commoditySwiper.slideTo(this.nav_active, 0, false);
+           this.GetOptimusMaterial({
+             pageNum: this.shop_nav_list[this.nav_active].pageNum,
+             pageSize: this.pageSize,
+             material_id: this.shop_nav_list[this.nav_active].material_id,
+           }).then(()=> {
+             $('html, body').animate({scrollTop: (this.init.offsetTop + 60)});
+             this.$set(this.allList, [this.nav_active], this.OptimusMaterial.msg.result_list.map_data);
+             this.loadingScroll = true;
+           });
+          }
+        },
+      },
       shop_list: {
         slidesPerView : 'auto',
         notNextTick: true,
         freeMode: true,
         on:{
-           click:() => {
-             let nowTlanslate;
+           tap:() => {
+            this.notScroll = false;
+            this.loadingScroll = false;
+            let nowTlanslate;
             const swiper = this.$refs.navSwiper.swiper;
             const swiperWidth = swiper.$el[0].clientWidth;
             const width = swiperWidth / 2;
@@ -177,31 +239,91 @@ export default {
              swiper.setTranslate(-nowTlanslate);
             }
             this.nav_active = clickIndex;
-            // this.findCommodity({type: clickIndex}).then((res)=> {
-            //   let shoplist = [];
-            //   for(let i = 0; i < this.typeCommodity.data.length; i += 1) {
-            //     shoplist.push(this.typeCommodity.data[i]);
-            //     this.$set(this.allList, [clickIndex], shoplist);
-            //   }
-            // });
-            // document.documentElement.scrollTop = offsetTop - 50;
-            // this.navSwiperFiexd = true;
+            const commoditySwiper = this.$refs.commoditySwiper.swiper;
+            commoditySwiper.slideTo(this.nav_active, 20, false);
+            this.GetOptimusMaterial({
+              pageNum: this.shop_nav_list[this.nav_active].pageNum,
+              pageSize: this.pageSize,
+              material_id: this.shop_nav_list[this.nav_active].material_id,
+            }).then(()=> {
+              $('html, body').animate({scrollTop: (this.init.offsetTop + 60)});
+              this.$set(this.allList, [this.nav_active], this.OptimusMaterial.msg.result_list.map_data);
+              this.loadingScroll = true;
+            });
            },
          },
       },
       shop_nav_list: [
-        '综合',
-        '女装',
-        '家居家装',
-        '数码家电',
-        '母婴',
-        '食品',
-        '鞋包配饰',
-        '美妆个护',
-        '男装',
-        '内衣',
-        '运动户外',
-        '天猫国际'
+        {
+          title: '综合',
+          material_id: '3786',
+          pageNum: 1,
+        },
+        {
+          title:'有好货',
+          material_id: '4092',
+          pageNum: 1,
+        },
+        {
+          title:'潮流范',
+          material_id: '4093',
+          pageNum: 1,
+        },
+        {
+          title:'特惠',
+          material_id: '4094',
+          pageNum: 1,
+        },
+        {
+          title: '女装',
+          material_id: '3788',
+          pageNum: 1,
+        },
+        {
+          title: '家居家装',
+          material_id: '3792',
+          pageNum: 1,
+        },
+        {
+          title: '数码家电',
+          material_id: '3793',
+          pageNum: 1,
+        },
+        {
+          title: '母婴',
+          material_id: '3789',
+          pageNum: 1,
+        },
+        {
+          title: '食品',
+          material_id: '3791',
+          pageNum: 1,
+        },
+        {
+          title: '鞋包配饰',
+          material_id: '3796',
+          pageNum: 1,
+        },
+        {
+          title: '美妆个护',
+          material_id: '3794',
+          pageNum: 1,
+        },
+        {
+          title: '男装',
+          material_id: '3790',
+          pageNum: 1,
+        },
+        {
+          title: '内衣',
+          material_id: '3787',
+          pageNum: 1,
+        },
+        {
+          title: '运动户外',
+          material_id: '3795',
+          pageNum: 1,
+        },
       ],
       indexBanner: {
         speed:300,
@@ -212,40 +334,61 @@ export default {
           el: '.index-banner-pagination',
         }
       },
+
+      pageSize: 20,
     }
   },
   mounted() {
-    // window.addEventListener('scroll', this.handleScroll);
     this.addEvent('scroll', this.handleScroll);
     this.init.offsetTop = this.navSwiper.$el[0].offsetTop;
-    if (this.allList[this.nav_active] == undefined) {
-      this.findCommodity().then((res)=> {
-        let shoplist = [];
-        for(let i = 0; i < this.typeCommodity.data.length; i += 1) {
-          shoplist.push(this.typeCommodity.data[i]);
-          this.$set(this.allList, [this.nav_active], shoplist);
-        }
-      });
-    }
+    this.GetOptimusMaterial({
+      pageNum: this.shop_nav_list[0].pageNum,
+      pageSize: this.pageSize,
+      material_id: this.shop_nav_list[0].material_id,
+    }).then(()=> {
+      this.notScroll = true;
+      this.$set(this.allList, [this.nav_active], this.OptimusMaterial.msg.result_list.map_data);
+      this.loadingScroll = true;
+    })
   },
   methods: {
     ...mapActions([
-      'findCommodity'
+      'GetOptimusMaterial',
     ]),
+    loadMoreCommod() {
+
+    },
     // 监听滚动
     addEvent(obj, callback) {
       window.addEventListener(obj, callback);
     },
-
     handleScroll() {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       this.domeScrollTop = scrollTop;
-      if (scrollTop > 10 && scrollTop < 60) {
-        this.backActive = 'active';
-      } else if (scrollTop >= 60) {
-        this.backActive = 'active1';
+       if($(document).scrollTop() + 50 >=$(document).height()-$(window).height() && this.loadingScroll){
+         this.loadingScroll = false;
+         let oldPageNum =  this.shop_nav_list[this.nav_active].pageNum;
+         oldPageNum = oldPageNum + 1;
+         this.shop_nav_list[this.nav_active].pageNum = oldPageNum;
+         this.GetOptimusMaterial({
+           pageNum: this.shop_nav_list[this.nav_active].pageNum,
+           pageSize: this.pageSize,
+           material_id: this.shop_nav_list[this.nav_active].material_id,
+         }).then(()=> {
+           const map_data = this.OptimusMaterial.msg.result_list.map_data;
+           if (map_data) {
+             for (let i = 0; i< map_data.length; i += 1) {
+               this.allList[this.nav_active].push(map_data[i]);
+             }
+           }
+           this.loadingScroll = true;
+         })
+       }
+      const opacity = scrollTop/150;
+      if(opacity<=1){
+        this.headerOpicty = opacity;
       } else {
-        this.backActive = '';
+        this.headerOpicty = 1;
       }
       const offsetTop = this.init.offsetTop;
       if (scrollTop > offsetTop - 50) {
@@ -262,7 +405,11 @@ export default {
     },
     ...mapState([
       'typeCommodity',
+      'OptimusMaterial',
     ]),
+  },
+  destroyed(){
+      window.removeEventListener('scroll', this.handleScroll);//监听页面滚动事件
   },
 
 }

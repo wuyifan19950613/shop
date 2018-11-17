@@ -31,7 +31,8 @@ const router = new Router({
       meta: {
         title: '精选淘宝天猫优惠卷-小欢有劵',
         keywords: '',
-        description: ''
+        description: '',
+        keepAlive: true,
       },
     },
     // 宝贝详情
@@ -42,7 +43,7 @@ const router = new Router({
       meta: {
         title: '精选淘宝天猫优惠卷-小欢有劵',
         keywords: '',
-        description: ''
+        description: '',
       },
     },
     // 商品

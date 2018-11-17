@@ -12,6 +12,7 @@ export default [
     component: listGoods,
     meta: {
       title: '宝贝列表',
+      keepAlive: true,
     },
   },
   {
@@ -20,6 +21,7 @@ export default [
     component: search,
     meta: {
       title: '搜索宝贝',
+      keepAlive: true,
     },
   },
 ]

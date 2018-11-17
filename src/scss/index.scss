@@ -9,14 +9,7 @@
       max-width: 750px;
       margin: auto;
       height:.95rem;
-      background: rgba(0,0,0,.5);
       transition: background .2s;
-      &.active{
-        background: rgba(0,0,0,.8);
-      }
-      &.active1{
-        background: rgba(0,0,0,1);
-      }
     }
     input[name="search"]{
       height: .68rem;
@@ -34,7 +27,7 @@
 .index-banner{
   padding-bottom: .6rem;
   background: #fff;
-  height: 3.8rem;
+  height: 3.5rem;
 }
 .advertisement{
   background: #fff;
@@ -186,7 +179,7 @@
           font-size: .22rem;
           margin-top: .2rem;
           .sale-price{
-            color: #d62927;
+            color: #f95e5b;
           }
           .market-price{
             color: #b0b0b0;
@@ -219,7 +212,6 @@
             font-size: .24rem;
             padding-left: .1rem;
             line-height: .3rem;
-            text-align: center;
             .j{
               position: relative;
               &:after{
@@ -253,6 +245,7 @@
     left: 0;
     width: 100%;
     background: #fff;
+    z-index: 99;
     box-shadow: 1px 1px 13px #ccc;
   }
   .nav-slide{
@@ -340,6 +333,11 @@
 .copy-password{
   background: #fff;
   padding: .2rem;
+  &:after{
+    content: '';
+    display: block;
+    height: 2rem;
+  }
   .password{
     text-align: center;
     border: 1px dashed #f95e5b;
@@ -391,14 +389,14 @@
   }
 }
 .return-page{
-  position: absolute;
+  position: fixed;
   top: .2rem;
   left: .2rem;
-  width: .6rem;
-  height: .6rem;
+  width: .8rem;
+  height: .8rem;
   background: rgba(0,0,0,.8);
   border-radius: 50%;
-  z-index: 3;
+  z-index: 99;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -718,4 +716,15 @@
   right: .2rem;
   transform: translateY(-50%);
   font-weight: normal;
+}
+.commoditySwiper-slide{
+  &.swiper-slide{
+    height: .1rem;
+  }
+  &.swiper-slide-active{
+    height: auto;
+  }
+}
+input{
+  -webkit-appearance:none;
 }
