@@ -1,4 +1,5 @@
-const devBaseURL = 'http://192.168.80.16:3000';
+// const devBaseURL = 'http://192.168.80.16:3000'; // 公司ip
+const devBaseURL = 'http://192.168.0.102:3000'; // 家ip
 const proBaseURL = 'http://api.xiaohuanzi.cn';
 
 // 分享地址
