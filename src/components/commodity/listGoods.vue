@@ -28,6 +28,12 @@ import { CouponNum } from '@/utils';
 
 export default {
   name: "",
+  metaInfo () {
+    return {
+      title: this.pageTitle,
+      meta: this.meta,
+    }
+  },
   data() {
     this.CouponNum = v => CouponNum(v);
     return{
@@ -35,6 +41,8 @@ export default {
       loadingScroll: false,
       commodityList: [],
       pageNum: 1,
+      pageTitle: '精选淘宝天猫优惠卷-小欢有劵',
+      meta: [],
       pageSize: 30,
       total_results: 0,
       toEnd: false,
@@ -46,15 +54,15 @@ export default {
       pageNum: this.pageNum,
       pageSize: this.pageSize,
     }
-      this.GetTaobaoMaterialOptional({
-        searchName: this.$route.query.name,
-        pageNum: this.pageNum,
-        pageSize: this.pageSize,
-      }).then(() => {
-        this.loading = false;
-        this.total_results = this.MaterialOptional.msg.total_results;
-        this.commodityList = this.MaterialOptional.msg.result_list.map_data;
-      })
+    this.GetTaobaoMaterialOptional({
+      searchName: this.$route.query.name,
+      pageNum: this.pageNum,
+      pageSize: this.pageSize,
+    }).then(() => {
+      this.loading = false;
+      this.total_results = this.MaterialOptional.msg.total_results;
+      this.commodityList = this.MaterialOptional.msg.result_list.map_data;
+    })
   },
   methods: {
     ...mapActions([

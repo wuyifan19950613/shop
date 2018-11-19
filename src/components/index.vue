@@ -92,6 +92,16 @@ import { mapActions, mapState } from 'vuex';
 import $ from 'jquery';
 export default {
   name: "index",
+  metaInfo: {
+    title: '精选淘宝天猫优惠卷-小欢有劵', // set a title
+    meta: [{                 // set meta
+      name: 'keyWords',
+      content: '小欢有劵,优惠,优惠券,淘宝内部优惠券,淘宝优惠,天猫内部优惠券,天猫优惠,小欢优惠,内部优惠,天猫超市优惠券,购物,网购,优惠直播,9.9元包邮,10元包邮,20元封顶,网购优惠',
+    },{
+      name: 'description',
+      content: '小欢有劵-是淘宝(天猫)内部优惠券领取网站,独家优惠券直接领取,领取后可直接下单抵扣,价格超实惠。千万淘宝优惠券每天更新,上淘宝(天猫)购物先上小宝优惠,比双11更低!'
+    }],
+  },
   data() {
     return{
       loading: true,

@@ -4,7 +4,7 @@ import {
   swiper,
   swiperSlide
 } from 'vue-awesome-swiper';
-
+import MetaInfo from 'vue-meta-info'
 import {
   Toast,
   Header,
@@ -33,6 +33,7 @@ Vue.component(Button.name, Button);
 Vue.use(ls);
 Vue.use(VueClipboard);
 Vue.use(InfiniteScroll);
+Vue.use(MetaInfo);
 // 图片懒加载
 Vue.use(VueLazyLoad,{
     error:'../../static/img/LazyLoaderror.png',
