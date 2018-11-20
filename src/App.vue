@@ -12,6 +12,7 @@
 
 <script>
 import {myfun} from '../test/js/Wuyifan-font.js' //注意路径
+
 export default {
   name: 'App',
   mounted() {

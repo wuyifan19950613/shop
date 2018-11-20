@@ -76,7 +76,7 @@
                   </div>
                 </router-link>
               </li>
-              <div v-if="!allList[index]" style="height:10.34rem;display:flex;justify-content: center;align-items: center;">
+              <div v-if="!allList[index]" style="height:1034px;display:flex;justify-content: center;align-items: center;">
                 <img src="@/assets/img/icon/loading.gif" alt="">
               </div>
             </ul>
