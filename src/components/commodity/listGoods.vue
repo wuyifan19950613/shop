@@ -24,6 +24,7 @@
 </template>
 <script>
 import { mapActions, mapState } from 'vuex';
+import { keyWords } from '@/utils/keyWords';
 import { CouponNum } from '@/utils';
 
 export default {
@@ -49,13 +50,51 @@ export default {
     }
   },
   mounted() {
+    const queryName = this.$route.query.name;
+    if (queryName == '卫衣') {
+      this.meta = keyWords.weiyiMate.meta;
+      this.pageTitle =  keyWords.weiyiMate.title;
+    } else if (queryName == '夹克') {
+      this.meta = keyWords.jiakeMate.meta;
+      this.pageTitle =  keyWords.jiakeMate.title;
+    } else if (queryName == '衬衫') {
+      this.meta = keyWords.chenshanMate.meta;
+      this.pageTitle =  keyWords.chenshanMate.title;
+    } else if (queryName == '板鞋') {
+      this.meta = keyWords.banxieMate.meta;
+      this.pageTitle =  keyWords.banxieMate.title;
+    } else if (queryName == '休闲/运动鞋') {
+      this.meta = keyWords.xiuxianMate.meta;
+      this.pageTitle =  keyWords.xiuxianMate.title;
+    } else if (queryName == '靴子') {
+      this.meta = keyWords.xueziMate.meta;
+      this.pageTitle =  keyWords.xueziMate.title;
+    } else if (queryName == '牛仔裤') {
+      this.meta = keyWords.niuzaikuMate.meta;
+      this.pageTitle =  keyWords.niuzaikuMate.title;
+    } else if (queryName == '休闲裤') {
+      this.meta = keyWords.xiuxiankuMate.meta;
+      this.pageTitle =  keyWords.xiuxiankuMate.title;
+    } else if (queryName == '双肩包') {
+      this.meta = keyWords.shuangjianbaoMate.meta;
+      this.pageTitle =  keyWords.shuangjianbaoMate.title;
+    } else if (queryName == '帽子') {
+      this.meta = keyWords.maoziMate.meta;
+      this.pageTitle =  keyWords.maoziMate.title;
+    } else if (queryName == '首饰') {
+      this.meta = keyWords.shoushiMate.meta;
+      this.pageTitle =  keyWords.shoushiMate.title;
+    } else if (queryName == '袜子') {
+      this.meta = keyWords.waziMate.meta;
+      this.pageTitle =  keyWords.waziMate.title;
+    }
     const data = {
-      commodityName: this.$route.query.name,
+      commodityName: queryName,
       pageNum: this.pageNum,
       pageSize: this.pageSize,
     }
     this.GetTaobaoMaterialOptional({
-      searchName: this.$route.query.name,
+      searchName: queryName,
       pageNum: this.pageNum,
       pageSize: this.pageSize,
     }).then(() => {

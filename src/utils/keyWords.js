@@ -1,126 +1,128 @@
-const keyWords = {
+import Vue from "vue";
+import conf from "@/config";
+import http from "@/utils/http";
+const thisVue = Vue.prototype;
+
+
+export const keyWords = {
   weiyiMate: {
-    title: '精选淘宝天猫优惠卷-小欢有劵',
+    title: '卫衣-小欢有劵',
     meta: [{
       name: 'keyWords',
       content: '卫衣,大码卫衣,女装卫衣,卫衣女,卫衣女套装,卫衣品牌,卫衣套装,长裤卫衣,情侣卫衣,韩版卫衣,带帽卫衣,情侣装,加厚卫衣,卫衣 女,运动套装,小熊卫衣,棉衣,优衣库,weiyi'
     },{
       name: 'description',
-      content: '',
+      content: '小欢有劵-是淘宝(天猫)内部优惠券领取网站,独家优惠券直接领取,领取后可直接下单抵扣,价格超实惠。千万淘宝优惠券每天更新,上淘宝(天猫)购物先上小欢有劵,比双11更低!',
     }]
   },
   jiakeMate: {
-    title: '精选淘宝天猫优惠卷-小欢有劵',
+    title: '夹克-小欢有劵',
     meta: [{
       name: 'keyWords',
-      content: ''
+      content: '夹克,男装夹克,男士休闲夹克,冬装,商务休闲夹克,男休闲,翻领夹克,夹克新款,女装夹克,飞行员夹克,品牌男夹克,jiake'
     },{
       name: 'description',
-      content: '',
+      content: '小欢有劵-是淘宝(天猫)内部优惠券领取网站,独家优惠券直接领取,领取后可直接下单抵扣,价格超实惠。千万淘宝优惠券每天更新,上淘宝(天猫)购物先上小欢有劵,比双11更低!',
     }]
   },
   chenshanMate: {
-    title: '精选淘宝天猫优惠卷-小欢有劵',
+    title: '衬衫-小欢有劵',
     meta: [{
       name: 'keyWords',
-      content: ''
+      content: '衬衫,格子衬衫,白衬衫,衬衫搭配,衬衫品牌,男士衬衫,法式衬衫,格子衬衫搭配,女士衬衫,女衬衫,男衬衫,衬衫优惠卷,免烫衬衫'
     },{
       name: 'description',
-      content: '',
+      content: '小欢有劵-是淘宝(天猫)内部优惠券领取网站,独家优惠券直接领取,领取后可直接下单抵扣,价格超实惠。千万淘宝优惠券每天更新,上淘宝(天猫)购物先上小欢有劵,比双11更低!',
     }]
   },
   banxieMate: {
-    title: '精选淘宝天猫优惠卷-小欢有劵',
+    title: '板鞋/滑板鞋-小欢有劵',
     meta: [{
       name: 'keyWords',
-      content: ''
+      content: '板鞋,滑板鞋,板鞋品牌,耐克板鞋,彪马板鞋,阿迪达斯板鞋,高帮板鞋,安踏板鞋,李宁板鞋,匡威板鞋,三叶草板鞋,puma板鞋,adidas板鞋,nike板鞋,耐克新款板鞋'
     },{
       name: 'description',
-      content: '',
+      content: '小欢有劵-是淘宝(天猫)内部优惠券领取网站,独家优惠券直接领取,领取后可直接下单抵扣,价格超实惠。千万淘宝优惠券每天更新,上淘宝(天猫)购物先上小欢有劵,比双11更低!',
     }]
   },
   xiuxianMate: {
-    title: '精选淘宝天猫优惠卷-小欢有劵',
+    title: '休闲鞋-小欢有劵',
     meta: [{
       name: 'keyWords',
-      content: ''
+      content: '休闲鞋,运动鞋,女士运动鞋,男士运动鞋,耐克休闲鞋,安踏休闲鞋,李宁休闲鞋,耐克运动鞋'
     },{
       name: 'description',
-      content: '',
+      content: '小欢有劵-是淘宝(天猫)内部优惠券领取网站,独家优惠券直接领取,领取后可直接下单抵扣,价格超实惠。千万淘宝优惠券每天更新,上淘宝(天猫)购物先上小欢有劵,比双11更低!',
     }]
   },
   xueziMate: {
-    title: '精选淘宝天猫优惠卷-小欢有劵',
+    title: '靴子-小欢有劵',
     meta: [{
       name: 'keyWords',
-      content: ''
+      content: '靴子,男士鞋子,女士靴子,男靴子,高跟靴子,真皮靴子,雪地靴,淘宝靴子'
     },{
       name: 'description',
-      content: '',
+      content: '小欢有劵-是淘宝(天猫)内部优惠券领取网站,独家优惠券直接领取,领取后可直接下单抵扣,价格超实惠。千万淘宝优惠券每天更新,上淘宝(天猫)购物先上小欢有劵,比双11更低!',
     }]
   },
   niuzaikuMate: {
-    title: '精选淘宝天猫优惠卷-小欢有劵',
+    title: '牛仔裤-小欢有劵',
     meta: [{
       name: 'keyWords',
-      content: ''
+      content: '牛仔裤,紧身牛仔裤,lee牛仔裤,修身牛仔裤,李维斯牛仔裤,直筒牛仔裤,街拍牛仔裤,男士牛仔裤,女士牛仔裤,破洞牛仔裤,阔腿牛仔裤,黑色牛仔裤,复古牛仔裤,宽松牛仔裤'
     },{
       name: 'description',
-      content: '',
+      content: '小欢有劵-是淘宝(天猫)内部优惠券领取网站,独家优惠券直接领取,领取后可直接下单抵扣,价格超实惠。千万淘宝优惠券每天更新,上淘宝(天猫)购物先上小欢有劵,比双11更低!',
     }]
   },
   xiuxiankuMate: {
-    title: '精选淘宝天猫优惠卷-小欢有劵',
+    title: '休闲裤-小欢有劵',
     meta: [{
       name: 'keyWords',
-      content: ''
+      content: '休闲裤,男士休闲裤,韩版休闲裤,时尚休闲裤,女士休闲裤,潮流休闲裤'
     },{
       name: 'description',
-      content: '',
+      content: '小欢有劵-是淘宝(天猫)内部优惠券领取网站,独家优惠券直接领取,领取后可直接下单抵扣,价格超实惠。千万淘宝优惠券每天更新,上淘宝(天猫)购物先上小欢有劵,比双11更低!',
     }]
   },
   shuangjianbaoMate: {
-    title: '精选淘宝天猫优惠卷-小欢有劵',
+    title: '双肩包-小欢有劵',
     meta: [{
       name: 'keyWords',
-      content: ''
+      content: '双肩包,双肩包推荐,帆布双肩包,耐克双肩包,女士双肩包,电脑双肩包,阿迪达斯双肩包,mcm双肩包,彪马双肩包,笔记本双肩包,双肩包团购'
     },{
       name: 'description',
-      content: '',
+      content: '小欢有劵-是淘宝(天猫)内部优惠券领取网站,独家优惠券直接领取,领取后可直接下单抵扣,价格超实惠。千万淘宝优惠券每天更新,上淘宝(天猫)购物先上小欢有劵,比双11更低!',
     }]
   },
   maoziMate: {
-    title: '精选淘宝天猫优惠卷-小欢有劵',
+    title: '帽子-小欢有劵',
     meta: [{
       name: 'keyWords',
-      content: ''
+      content: '帽子,棒球帽子,男士帽子,手工帽子,耐克帽子,棒球帽,遮阳帽'
     },{
       name: 'description',
-      content: '',
+      content: '小欢有劵-是淘宝(天猫)内部优惠券领取网站,独家优惠券直接领取,领取后可直接下单抵扣,价格超实惠。千万淘宝优惠券每天更新,上淘宝(天猫)购物先上小欢有劵,比双11更低!',
     }]
   },
   shoushiMate: {
-    title: '精选淘宝天猫优惠卷-小欢有劵',
+    title: '首饰-小欢有劵',
     meta: [{
       name: 'keyWords',
-      content: ''
+      content: '首饰,黄金首饰,首饰盒,珠宝首饰,金银首饰,钻石首饰,铂金首饰'
     },{
       name: 'description',
-      content: '',
+      content: '小欢有劵-是淘宝(天猫)内部优惠券领取网站,独家优惠券直接领取,领取后可直接下单抵扣,价格超实惠。千万淘宝优惠券每天更新,上淘宝(天猫)购物先上小欢有劵,比双11更低!',
     }]
   },
   waziMate: {
-    title: '精选淘宝天猫优惠卷-小欢有劵',
+    title: '袜子-小欢有劵',
     meta: [{
       name: 'keyWords',
-      content: ''
+      content: '袜子,条纹袜子,圣诞袜子,复古袜子,短袜,船袜,丝袜,黑丝袜,裤袜,男士袜子,女士袜子'
     },{
       name: 'description',
-      content: '',
+      content: '小欢有劵-是淘宝(天猫)内部优惠券领取网站,独家优惠券直接领取,领取后可直接下单抵扣,价格超实惠。千万淘宝优惠券每天更新,上淘宝(天猫)购物先上小欢有劵,比双11更低!',
     }]
   },
 }
-
-
-
-export default http;

@@ -76,7 +76,7 @@
                   </div>
                 </router-link>
               </li>
-              <div v-if="!allList[index]" style="height:517px;display:flex;justify-content: center;align-items: center;">
+              <div v-if="!allList[index]" style="height:10.34rem;display:flex;justify-content: center;align-items: center;">
                 <img src="@/assets/img/icon/loading.gif" alt="">
               </div>
             </ul>
@@ -90,6 +90,7 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import $ from 'jquery';
+
 export default {
   name: "index",
   metaInfo: {
@@ -223,7 +224,7 @@ export default {
         notNextTick: true,
         freeMode: true,
         on:{
-           tap:() => {
+           click:() => {
             this.notScroll = false;
             this.loadingScroll = false;
             let nowTlanslate;
