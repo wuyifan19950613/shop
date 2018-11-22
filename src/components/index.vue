@@ -86,6 +86,12 @@
         </swiper>
       </div>
       <!--  商品列表end-->
+
+      <!--  返回顶部start-->
+      <div class="fh-top" @click="fhTop">
+        <img src="@/assets/img/icon/fh-top.png" alt="">
+      </div>
+      <!--  返回顶部end-->
     </div>
   </div>
 </template>
@@ -356,6 +362,7 @@ export default {
       ],
       indexBanner: {
         speed:300,
+        loop : true,
         autoplay : {
           delay:3000,
           disableOnInteraction: false,
@@ -385,8 +392,8 @@ export default {
     ...mapActions([
       'GetOptimusMaterial',
     ]),
-    loadMoreCommod() {
-
+    fhTop() {
+      $('html, body').animate({scrollTop: 0});
     },
     // 监听滚动
     addEvent(obj, callback) {
