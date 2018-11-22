@@ -5,7 +5,7 @@
       <div class="serch-commodity">
         <div :class="`serch-content ${backActive}`" :style="`background:rgba(0,0,0,${headerOpicty})`">
           <router-link :to="{ path: '/commodity/search'}">
-            <input name="search" type="text" placeholder="请输入搜索文字">
+            <input name="search" type="text" placeholder="请输入搜索文字" :style="`opacity:${headerOpicty}`">
           </router-link>
         </div>
       </div>
@@ -14,7 +14,9 @@
       <!--  首页banner图start-->
       <swiper :options="indexBanner" class="index-banner">
         <swiper-slide v-for="(item, index) in imgUrl" :key="index">
-          <img v-lazy="item" alt="" class="">
+          <a :href="item.href">
+            <img :src="item.img" alt="" class="">
+          </a>
         </swiper-slide>
         <div class="swiper-pagination index-banner-pagination" slot="pagination"></div>
       </swiper>
@@ -119,11 +121,27 @@ export default {
         offsetTop: '',
       },
       imgUrl: [
-        'https://img11.static.yhbimg.com/yhb-img01/2018/10/22/08/0174e468be6786ad4367c0b4a5f30c15f5.jpg?imageView2/2/w/640/h/240/q/60',
-        'https://img10.static.yhbimg.com/yhb-img01/2018/10/22/08/0130dca2a5117f52a251779ce187e18cd1.jpg?imageView2/2/w/640/h/240/q/60',
-        'https://img11.static.yhbimg.com/yhb-img01/2018/10/22/08/01917963f65a3d10854d0e989da9c4683b.jpg?imageView2/2/w/640/h/240/q/60',
-        'https://img10.static.yhbimg.com/yhb-img01/2018/10/22/08/01cd93e72039c5f116fb28014e134200c9.jpg?imageView2/2/w/640/h/240/q/60',
-        'https://img11.static.yhbimg.com/yhb-img01/2018/10/22/08/01f2018911d102f9eea279b0cb7baaf833.jpg?imageView2/2/w/640/h/240/q/60',
+        {
+          img:'https://img.alicdn.com/tfs/TB1pfqLRFXXXXXEXpXXXXXXXXXX-440-180.jpg',
+          href: 'https://s.click.taobao.com/Pj1unJw',
+        },
+        {
+           img: 'https://img.alicdn.com/tfs/TB1XMzYEL5TBuNjSspmXXaDRVXa-440-180.jpg',
+           href: 'https://s.click.taobao.com/Hh1snJw',
+        },
+        {
+          img:'https://img.alicdn.com/tfs/TB101ZQdgoQMeJjy0FnXXb8gFXa-440-180.jpg',
+          href: 'https://s.click.taobao.com/tZMvnJw',
+        },{
+          img:'https://gtms04.alicdn.com/tps/i4/TB1zBf8LFXXXXaAaXXXQO4D5VXX-440-180.jpg',
+          href: 'https://s.click.taobao.com/HeFvnJw',
+        },{
+          img: 'https://zebra.alicdn.com/7410ffef-00ca-4220-aa98-269563d86ebd.jpg',
+          href: 'https://s.click.taobao.com/pOuunJw',
+        },{
+          img: 'https://zebra.alicdn.com/539c069c-4e27-4984-9014-6da7d0a168be.jpg',
+          href: 'https://s.click.taobao.com/tRbunJw',
+        }
       ],
       commodityUrl:[
         {
@@ -339,7 +357,8 @@ export default {
       indexBanner: {
         speed:300,
         autoplay : {
-          delay:3000
+          delay:3000,
+          disableOnInteraction: false,
         },
         pagination: {
           el: '.index-banner-pagination',

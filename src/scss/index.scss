@@ -12,6 +12,7 @@
       transition: background .2s;
     }
     input[name="search"]{
+      opacity: 0;
       height: .68rem;
       width: 5.2rem;
       border: none;
@@ -27,7 +28,7 @@
 .index-banner{
   padding-bottom: .6rem;
   background: #fff;
-  height: 3.5rem;
+  height: 3.1rem;
 }
 .advertisement{
   background: #fff;
