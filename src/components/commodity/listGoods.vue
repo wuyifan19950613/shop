@@ -1,7 +1,7 @@
 <template>
   <div id="fatherbox">
     <loading v-if="loading"></loading>
-    <ul class="like-commdity" v-else   v-infinite-scroll="loadMore" infinite-scroll-disabled="loadingScroll" infinite-scroll-distance="10" infinite-scroll-immediate-check="false">
+    <ul class="like-commdity" v-else-if="!nodata"   v-infinite-scroll="loadMore" infinite-scroll-disabled="loadingScroll" infinite-scroll-distance="10" infinite-scroll-immediate-check="false">
         <li class="" v-for="(t, i) in commodityList" :key="i">
           <router-link :to="{ path: '/commodity/details', query: { num_iid: t.num_iid, couponInfo: CouponNum(t.coupon_info), url:`https:${t.coupon_share_url}`}}">
             <div>
@@ -18,6 +18,12 @@
           </router-link>
         </li>
     </ul>
+    <div class="no-data" v-if="nodata">
+      <div>
+        <img src="@/assets/img/icon/zanwushuju_03.png" alt="">
+        <div class="sorry-text">Sorry,没有找到“{{searchName}}”相关的宝贝,请输入关键字查询！</div>
+      </div>
+    </div>
     <toEnd v-if="toEnd"></toEnd>
     </div>
   </div>
@@ -47,10 +53,13 @@ export default {
       pageSize: 30,
       total_results: 0,
       toEnd: false,
+      searchName: '',
+      nodata: false,
     }
   },
   mounted() {
     const queryName = this.$route.query.name;
+    this.searchName = queryName;
     if (queryName == '卫衣') {
       this.meta = keyWords.weiyiMate.meta;
       this.pageTitle =  keyWords.weiyiMate.title;
@@ -99,8 +108,13 @@ export default {
       pageSize: this.pageSize,
     }).then(() => {
       this.loading = false;
-      this.total_results = this.MaterialOptional.msg.total_results;
-      this.commodityList = this.MaterialOptional.msg.result_list.map_data;
+      if (this.MaterialOptional.code == 200) {
+        this.total_results = this.MaterialOptional.msg.total_results;
+        this.commodityList = this.MaterialOptional.msg.result_list.map_data;
+      } else{
+        this.nodata = true;
+      }
+
     })
   },
   methods: {

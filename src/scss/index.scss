@@ -728,3 +728,19 @@
 input{
   -webkit-appearance:none;
 }
+.no-data{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20%;
+  text-align: center;
+  img{
+    width: 50%;
+  }
+  .sorry-text{
+    font-size: .3rem;
+    margin-top: .5rem;
+    font-weight: bold;
+    padding: 0 .2rem;
+  }
+}
