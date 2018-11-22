@@ -73,6 +73,11 @@ export default {
 
     }
   },
+  activated() {
+    //do something after mounting vue instance
+    const history = this.$getLS('HistoricalRecords').split('|');
+    this.history = history;
+  },
   directives: {
     focus: {
       inserted: function (el) {

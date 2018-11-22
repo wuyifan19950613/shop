@@ -5,7 +5,7 @@
         <li class="" v-for="(t, i) in commodityList" :key="i">
           <router-link :to="{ path: '/commodity/details', query: { num_iid: t.num_iid, couponInfo: CouponNum(t.coupon_info), url:`https:${t.coupon_share_url}`}}">
             <div>
-              <img v-lazy="t.pict_url" alt="">
+              <img :src="t.pict_url" alt="">
             </div>
             <div class="commdity-info">
               <h1 class="title">{{t.title}}</h1>
@@ -58,64 +58,7 @@ export default {
     }
   },
   mounted() {
-    const queryName = this.$route.query.name;
-    this.searchName = queryName;
-    if (queryName == '卫衣') {
-      this.meta = keyWords.weiyiMate.meta;
-      this.pageTitle =  keyWords.weiyiMate.title;
-    } else if (queryName == '夹克') {
-      this.meta = keyWords.jiakeMate.meta;
-      this.pageTitle =  keyWords.jiakeMate.title;
-    } else if (queryName == '衬衫') {
-      this.meta = keyWords.chenshanMate.meta;
-      this.pageTitle =  keyWords.chenshanMate.title;
-    } else if (queryName == '板鞋') {
-      this.meta = keyWords.banxieMate.meta;
-      this.pageTitle =  keyWords.banxieMate.title;
-    } else if (queryName == '休闲/运动鞋') {
-      this.meta = keyWords.xiuxianMate.meta;
-      this.pageTitle =  keyWords.xiuxianMate.title;
-    } else if (queryName == '靴子') {
-      this.meta = keyWords.xueziMate.meta;
-      this.pageTitle =  keyWords.xueziMate.title;
-    } else if (queryName == '牛仔裤') {
-      this.meta = keyWords.niuzaikuMate.meta;
-      this.pageTitle =  keyWords.niuzaikuMate.title;
-    } else if (queryName == '休闲裤') {
-      this.meta = keyWords.xiuxiankuMate.meta;
-      this.pageTitle =  keyWords.xiuxiankuMate.title;
-    } else if (queryName == '双肩包') {
-      this.meta = keyWords.shuangjianbaoMate.meta;
-      this.pageTitle =  keyWords.shuangjianbaoMate.title;
-    } else if (queryName == '帽子') {
-      this.meta = keyWords.maoziMate.meta;
-      this.pageTitle =  keyWords.maoziMate.title;
-    } else if (queryName == '首饰') {
-      this.meta = keyWords.shoushiMate.meta;
-      this.pageTitle =  keyWords.shoushiMate.title;
-    } else if (queryName == '袜子') {
-      this.meta = keyWords.waziMate.meta;
-      this.pageTitle =  keyWords.waziMate.title;
-    }
-    const data = {
-      commodityName: queryName,
-      pageNum: this.pageNum,
-      pageSize: this.pageSize,
-    }
-    this.GetTaobaoMaterialOptional({
-      searchName: queryName,
-      pageNum: this.pageNum,
-      pageSize: this.pageSize,
-    }).then(() => {
-      this.loading = false;
-      if (this.MaterialOptional.code == 200) {
-        this.total_results = this.MaterialOptional.msg.total_results;
-        this.commodityList = this.MaterialOptional.msg.result_list.map_data;
-      } else{
-        this.nodata = true;
-      }
-
-    })
+    this.listInit();
   },
   methods: {
     ...mapActions([
@@ -123,6 +66,66 @@ export default {
       'GetTaobaoCommodityFind',
       'GetTaobaoMaterialOptional',
     ]),
+    listInit(){
+      const queryName = this.$route.query.name;
+      this.searchName = queryName;
+      if (queryName == '卫衣') {
+        this.meta = keyWords.weiyiMate.meta;
+        this.pageTitle =  keyWords.weiyiMate.title;
+      } else if (queryName == '夹克') {
+        this.meta = keyWords.jiakeMate.meta;
+        this.pageTitle =  keyWords.jiakeMate.title;
+      } else if (queryName == '衬衫') {
+        this.meta = keyWords.chenshanMate.meta;
+        this.pageTitle =  keyWords.chenshanMate.title;
+      } else if (queryName == '板鞋') {
+        this.meta = keyWords.banxieMate.meta;
+        this.pageTitle =  keyWords.banxieMate.title;
+      } else if (queryName == '休闲/运动鞋') {
+        this.meta = keyWords.xiuxianMate.meta;
+        this.pageTitle =  keyWords.xiuxianMate.title;
+      } else if (queryName == '靴子') {
+        this.meta = keyWords.xueziMate.meta;
+        this.pageTitle =  keyWords.xueziMate.title;
+      } else if (queryName == '牛仔裤') {
+        this.meta = keyWords.niuzaikuMate.meta;
+        this.pageTitle =  keyWords.niuzaikuMate.title;
+      } else if (queryName == '休闲裤') {
+        this.meta = keyWords.xiuxiankuMate.meta;
+        this.pageTitle =  keyWords.xiuxiankuMate.title;
+      } else if (queryName == '双肩包') {
+        this.meta = keyWords.shuangjianbaoMate.meta;
+        this.pageTitle =  keyWords.shuangjianbaoMate.title;
+      } else if (queryName == '帽子') {
+        this.meta = keyWords.maoziMate.meta;
+        this.pageTitle =  keyWords.maoziMate.title;
+      } else if (queryName == '首饰') {
+        this.meta = keyWords.shoushiMate.meta;
+        this.pageTitle =  keyWords.shoushiMate.title;
+      } else if (queryName == '袜子') {
+        this.meta = keyWords.waziMate.meta;
+        this.pageTitle =  keyWords.waziMate.title;
+      }
+      const data = {
+        commodityName: queryName,
+        pageNum: this.pageNum,
+        pageSize: this.pageSize,
+      }
+      this.GetTaobaoMaterialOptional({
+        searchName: queryName,
+        pageNum: this.pageNum,
+        pageSize: this.pageSize,
+      }).then(() => {
+        this.loading = false;
+        if (this.MaterialOptional.code == 200) {
+          this.total_results = this.MaterialOptional.msg.total_results;
+          this.commodityList = this.MaterialOptional.msg.result_list.map_data;
+        } else{
+          this.nodata = true;
+          this.loading = false;
+        }
+      });
+    },
     loadMore(){
       this.loading = false;
       this.loadingScroll = true;
@@ -132,7 +135,7 @@ export default {
       }
       this.pageNum = this.pageNum + 1;
       const data = {
-        searchName: this.$route.query.name,
+        searchName: this.searchName,
         pageNum: this.pageNum,
         pageSize: this.pageSize,
       }
