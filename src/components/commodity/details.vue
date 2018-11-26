@@ -114,7 +114,7 @@ export default {
     this.GetTaobaoCommodityDetails({num_iid: this.$route.query.num_iid}).then(() =>{
 
       this.CommodityDetails = this.taobaoCommodityDetails.msg;
-      this.small_images = this.CommodityDetails.small_images.string
+      this.small_images = this.CommodityDetails.small_images ? this.CommodityDetails.small_images.string : '';
       const infoData = {
         title: this.taobaoCommodityDetails.msg.title,
         url: `${this.url}`,
