@@ -181,6 +181,10 @@
           margin-top: .2rem;
           .sale-price{
             color: #f95e5b;
+            b{
+              font-size: .3rem;
+              font-weight: normal;
+            }
           }
           .market-price{
             color: #b0b0b0;
@@ -191,9 +195,8 @@
         .progress{
           position: relative;
           height: .3rem;
-          background: rgba(230, 95, 95, 0.5);
           border-radius: .2rem;
-          margin-top: .2rem;
+          margin-top: .15rem;
           .count-coupon{
             position: absolute;
             top: 0;
@@ -208,11 +211,13 @@
           }
           .used-coupon{
             background: #f95e5b;
+            display: inline-block;
             border-radius: .2rem;
             color: #fff;
             font-size: .24rem;
-            padding-left: .1rem;
+            padding-left: .2rem;
             line-height: .3rem;
+            padding-right: .2rem;
             .j{
               position: relative;
               &:after{
@@ -295,6 +300,7 @@
     margin-top: .15rem;
     position: relative;
     display: inline-block;
+
     .title{
       font-size: .24rem;
       color: #fff;

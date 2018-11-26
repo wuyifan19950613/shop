@@ -65,12 +65,12 @@
                       {{t.title}}
                     </h1>
                     <div class="price">
-                      <span class="sale-price">¥{{(t.zk_final_price - t.coupon_amount).toFixed(2)}}</span>
+                      <span class="sale-price">¥<b>{{(t.zk_final_price - t.coupon_amount).toFixed(2)}}</b></span>
                       <span class="market-price">¥{{t.zk_final_price}}</span>
                     </div>
                     <div class="progress">
                       <span class="count-coupon">剩余{{t.coupon_total_count}}</span>
-                      <div class="used-coupon" style="width:22%;">
+                      <div class="used-coupon">
                         <span class="j">劵</span>
                         <span>{{t.coupon_amount}}元</span>
                       </div>
