@@ -112,7 +112,6 @@ export default {
   },
   mounted() {
     this.GetTaobaoCommodityDetails({num_iid: this.$route.query.num_iid}).then(() =>{
-
       this.CommodityDetails = this.taobaoCommodityDetails.msg;
       this.small_images = this.CommodityDetails.small_images ? this.CommodityDetails.small_images.string : '';
       const infoData = {
